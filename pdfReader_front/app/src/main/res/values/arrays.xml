@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="paper_array">
+        <item>KISS</item>
+        <item>RISS</item>
+        <item>Google Scholar</item>
+        <item>DBpia</item>
+    </string-array>
+</resources>
