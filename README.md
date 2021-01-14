@@ -1,3 +1,27 @@
-"# capstone-design" 
-"# capstone-design" 
-"# capstone-design" 
+-안드로이드 스튜디오 pdf리더기 오픈소스
+현재 에러 상황:
+안드로이드8에서는 정상 작동하나 안드로이드 9, 10에서는 경로 문제로 에러가 발생
+안드로이드 9버전 에러 코드: 
+java.lang.arrayindexoutofboundsexception: length=1; index=1
+
+안드로이드 10버전 에러 코드:
+V/URI: /document/msf:3194
+    /document/msf:3194 3194
+W/System.err: java.io.IOException: 3194 not found as file or resource.
+->모두 안드로이드 버전마다 경로 주소가 달라 발생하는 문제로 발생하는 오류로 추측됨
+향후계획:
+현재 우리는 비즈니스적으로 출시할 것이 아닌 졸업작품임으로 현재 최신 버전인 안드로이드 10 버전으로 맞춰 개발하는 것이 바람직하다고 생각.
+
+-기술조사 현황
+Lstm 활용 예정
+1. pdf 전체파일을 읽는다
+2. pdf에서 표, 테이블이 없는 순수한 본문의 글을 추출한 후의 pdf글을 가져온다.
+->전처리 방법 or 수동으로 자료 조사
+3. 가져온 pdf글을 학습시킨다.
+->이 위는 모두 파이썬 lstm을 활용하여 적용 예정, 데이터 학습 방법은 앱을 실행할 때마다 하지 않고 직접 학습시켜 놓고 tensorflow lite를 이용하여 안드로이드 스튜디오에 적용.
+적용 방법:
+https://bugloss-chestnut.tistory.com/entry/Android-h5-pb-tflite%EB%A1%9C-%EB%B3%80%ED%99%98-%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C%EC%97%90-%EC%A0%81%EC%9A%A9
+4. 페이지 이동 시 마다 학습시킨 데이터를 바탕으로 다음 단어를 찾는다.
+->이전에 학습시킨 논문 데이터를 안드로이드 스튜디오에 적용, 안드로이드 스튜디오에서 학습된 데이터를 바탕으로 문맥에 맞는 단어를 자동으로 읽을 수 있도록 설정
+
+이 내용 바탕으로 기술 조사, 구현 에러 수정 부탁드려요!
