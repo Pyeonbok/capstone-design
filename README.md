@@ -25,10 +25,15 @@
 5.	추가 기능(시간표 생성)
 
 
+
+
+
 -tensorflow word2vec 관련 정보 링크
 
 
 https://hyrama.com/?p=488
+
+
 
 
 -파이썬 서버 관련 정보 링크
