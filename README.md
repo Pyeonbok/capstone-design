@@ -36,18 +36,26 @@ https://hyrama.com/?p=488
 
 <node js>
 https://java8.tistory.com/466
+  
+  
 
 
 <python 서버 생성>
 https://seopseop911.tistory.com/15
 
 
+
+
 <Django>
 https://hugrypiggykim.com/2016/08/21/python-postgresql-django-rest-tensorflow-%ec%84%9c%eb%b9%84%ec%8a%a4-%ea%b0%9c%eb%b0%9c/
+  
+  
 
 
 <텐서플로우 안드로이드 적용 관련>
 https://euzl.github.io/hackday_1/
+
+
 
 
 <안드로이드 파이썬 소켓 통신>
