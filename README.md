@@ -79,3 +79,10 @@ https://euzl.github.io/hackday_1/
 <안드로이드 파이썬 소켓 통신>
 
 https://blog.naver.com/rhrkdfus/221406909355
+
+
+
+
+
+<파이썬 node.js 연동>
+https://steemit.com/kr/@junn/python-mediteam-us-tf-idf-konlpy
