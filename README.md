@@ -85,4 +85,8 @@ https://blog.naver.com/rhrkdfus/221406909355
 
 
 <파이썬 node.js 연동>
+
+https://steemit.com/kr/@junn/python-mediteam-us-tf-idf-konlpy
+
+
 https://steemit.com/kr/@junn/python-mediteam-us-tf-idf-konlpy
