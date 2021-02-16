@@ -21,4 +21,9 @@
     <style name="customCheckboxFontStyle" parent="@android:style/Widget.DeviceDefault.CompoundButton.CheckBox">
         <item name="android:fontFamily">@font/font</item>
     </style>
+
+    <style name="customSpinnerFontStyle" parent="@android:style/Widget.DeviceDefault.Spinner">
+        <item name="android:fontFamily">@font/font</item>
+    </style>
+
 </resources>

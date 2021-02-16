@@ -23,7 +23,6 @@ class SettingActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-
         // Spinner
         val spinner1: Spinner = findViewById(R.id.major_spinner1) as Spinner
         val spinner2: Spinner = findViewById(R.id.major_spinner2) as Spinner

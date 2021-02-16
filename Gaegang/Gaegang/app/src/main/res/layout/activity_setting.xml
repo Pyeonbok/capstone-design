@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text="※ 설정 ※"
+            android:text="초기 설정"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:fontFamily="@font/ridibatang"
@@ -119,7 +119,7 @@
 
         <LinearLayout
             android:id="@+id/layout_select_2_1"
-             android:layout_width="match_parent"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical">
@@ -157,13 +157,77 @@
         <TableLayout
             android:id="@+id/layout_time_table"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="20dp"
+            android:stretchColumns="*"
+            android:background="@drawable/border">
 
             <TableRow
+                android:background="@drawable/border"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/ridibatang"
+                    android:text="시간"
+                    android:textColor="@color/blue_1"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/ridibatang"
+                    android:text="월"
+                    android:textColor="@color/blue_1" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/ridibatang"
+                    android:text="화"
+                    android:textColor="@color/blue_1" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/ridibatang"
+                    android:text="수"
+                    android:textColor="@color/blue_1" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/ridibatang"
+                    android:text="목"
+                    android:textColor="@color/blue_1" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/ridibatang"
+                    android:text="금"
+                    android:textColor="@color/blue_1" />
+
+            </TableRow>
+            <TableRow
+                android:background="@drawable/border"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+
+            </TableRow>
 
             <TableRow
+                android:background="@drawable/border"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 

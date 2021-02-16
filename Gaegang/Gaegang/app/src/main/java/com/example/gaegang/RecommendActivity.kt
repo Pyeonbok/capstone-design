@@ -24,6 +24,13 @@ class RecommendActivity : AppCompatActivity() {
 /* 라벨, 강의이름, 교수이름, 이수구분, 수업방법, 요일, 시간
 *
 * 아래의 recList는 test를 위한 예시입니다 */
+
+    /*
+    * 강의명 / 교수명
+    * 이수구분 / 학점
+    * 수업방법 (온라인/오프라인)
+    * 요일 / 시간
+    */
     var recList = arrayListOf<Recommended>(
     Recommended("라벨","강의명","교수명","이수구분","수업방법","요일","시간") ,
     Recommended("외국어","프랑스어2","교수명","교양필수","온라인","목요일","1A-2B"),
@@ -45,6 +52,15 @@ class RecommendActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        // textView (stt) 값 전달받기
+        val getintent = getIntent()
+        if (getintent.hasExtra("textStt")){
+            text_stt2.text = getintent.getStringExtra("textStt")
+        } else {
+
+        }
+
+
         // recyclerview
         val mAdapter = RecommendAdapter(this, recList)
         recyclerview_rec.adapter = mAdapter
@@ -53,6 +69,4 @@ class RecommendActivity : AppCompatActivity() {
         recyclerview_rec.layoutManager = lm
         recyclerview_rec.setHasFixedSize(true)
     }
-
-
 }

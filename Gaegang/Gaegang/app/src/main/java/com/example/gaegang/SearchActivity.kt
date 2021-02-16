@@ -46,18 +46,18 @@ class SearchActivity : AppCompatActivity() {
             }
         }
 
-
         // intent 전환
         val next_intent = findViewById(id.button_next) as ImageButton
         next_intent.setOnClickListener {
             val intent= Intent(this,RecommendActivity::class.java)
+            intent.putExtra("textStt", textView!!.text)
             startActivity(intent)
         }
 
         val prev_intent = findViewById(id.button_prev) as ImageButton
         prev_intent.setOnClickListener {
-            val intent= Intent(this,SettingActivity::class.java)
-            startActivity(intent)
+            val intent2= Intent(this,SettingActivity::class.java)
+            startActivity(intent2)
         }
     }
 
