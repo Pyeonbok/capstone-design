@@ -1,5 +1,14 @@
 package com.example.gaegang.dataClass
 
-/* 라벨, 강의이름, 교수이름, 이수구분, 수업방법, 요일, 시간 */
-class Recommended (val label:String, val lecture:String, val professor:String,
-                   val classification:String, val teaching_method:String, val week:String, val time:String)
+/*
+   * 강의명 / 교수명
+   * 이수구분 / 학점
+   * 수업방법 (온라인/오프라인)
+   * 요일 / 시간
+   */
+
+data class Recommended (
+    var lecture:String, var professor:String,
+    var classification:String, var credit:String,
+    var teaching_method:String,
+    var week:String, var time:String)
