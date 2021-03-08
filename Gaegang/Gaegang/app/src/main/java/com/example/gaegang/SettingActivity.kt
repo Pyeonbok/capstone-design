@@ -3,19 +3,417 @@ package com.example.gaegang
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.method.TextKeyListener.clear
+import android.util.Log
+import android.util.TypedValue
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
+import kotlinx.android.synthetic.*
+import kotlinx.android.synthetic.main.activity_setting.*
 
 class SettingActivity : AppCompatActivity() {
-    lateinit var adapter1: ArrayAdapter<CharSequence>
-    var adapter2: ArrayAdapter<CharSequence>? = null
-    var choice_uni = ""
-    var choice_major = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting)
 
+        val items_uni = resources.getStringArray(R.array.arr_uni)
+        val items_major_inmun = resources.getStringArray(R.array.arr_inmun)
+        val items_major_jayeon = resources.getStringArray(R.array.arr_jayeon)
+        val items_major_sahoe = resources.getStringArray(R.array.arr_sahoe)
+        val items_major_global = resources.getStringArray(R.array.arr_global)
+        val items_major_gong = resources.getStringArray(R.array.arr_gong)
+        val items_major_jeongbo = resources.getStringArray(R.array.arr_jeongbo)
+        val items_major_gyeongyeong = resources.getStringArray(R.array.arr_gyeongyeong)
+        val items_major_yesul = resources.getStringArray(R.array.arr_yesul)
+        val items_major_sabeom = resources.getStringArray(R.array.arr_sabeom)
+        val items_major_dosi = resources.getStringArray(R.array.arr_dosi)
+        val items_major_saengmyeong = resources.getStringArray(R.array.arr_saengmyeong)
+        val items_major_dongbuga = resources.getStringArray(R.array.arr_dongbuga)
+        val items_major_beob = resources.getStringArray(R.array.arr_beob)
+
+
+        val uniAdapter = object : ArrayAdapter<String>(this, R.layout.simple_spinner_dropdown_item) {
+            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val v = super.getView(position, convertView, parent)
+                if (position == count) {
+                    //마지막 포지션의 textView 를 힌트 용으로 사용합니다.
+                    (v.findViewById<View>(R.id.text_spinner) as TextView).text = ""
+                    //아이템의 마지막 값을 불러와 hint로 추가해 줍니다.
+                    (v.findViewById<View>(R.id.text_spinner) as TextView).hint = getItem(count)
+                }
+                return v
+            }
+            override fun getCount(): Int {
+                //마지막 아이템은 힌트용으로만 사용하기 때문에 getCount에 1을 빼줍니다.
+                return super.getCount() - 1
+            }
+        }
+
+        val majorAdapter = object : ArrayAdapter<String>(this, R.layout.simple_spinner_dropdown_item) {
+            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val v = super.getView(position, convertView, parent)
+                if (position == count) {
+                    //마지막 포지션의 textView 를 힌트 용으로 사용합니다.
+                    (v.findViewById<View>(R.id.text_spinner) as TextView).text = ""
+                    //아이템의 마지막 값을 불러와 hint로 추가해 줍니다.
+                    (v.findViewById<View>(R.id.text_spinner) as TextView).hint = getItem(count)
+                }
+                return v
+            }
+            override fun getCount(): Int {
+                //마지막 아이템은 힌트용으로만 사용하기 때문에 getCount에 1을 빼줍니다.
+                return super.getCount() - 1
+            }
+        }
+
+        uniAdapter.addAll(items_uni.toMutableList())
+        uniAdapter.add("단과대학")
+        major_spinner1.adapter=uniAdapter
+        major_spinner1.setSelection(uniAdapter.count)
+        major_spinner1.dropDownVerticalOffset=dipToPixels(30f).toInt()
+        major_spinner1.onItemSelectedListener=object:AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                when(position){
+
+                    0 ->{
+                        majorAdapter.clear()
+                        majorAdapter.addAll(items_major_inmun.toMutableList())
+                        majorAdapter.add("학과 / 학부")
+                        major_spinner2.adapter=majorAdapter
+                        major_spinner2.setSelection(majorAdapter.count)
+                        major_spinner2.dropDownVerticalOffset=dipToPixels(30f).toInt()
+                        major_spinner2.onItemSelectedListener=object:AdapterView.OnItemSelectedListener {
+                            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                                when (position) {
+                                    0 -> {
+                                    }
+                                    1 -> {
+                                    }
+                                    2 -> {
+                                    }
+                                    3 -> {
+                                    }
+                                    4 -> {
+                                    }
+                                }
+                            }
+                            override fun onNothingSelected(parent: AdapterView<*>?) {
+                                Log.d("MyTag", "onNothingSelected")                            }
+                        }
+                    }
+                    1 ->{
+                        majorAdapter.clear()
+                        majorAdapter.addAll(items_major_jayeon.toMutableList())
+                        majorAdapter.add("학과 / 학부")
+                        major_spinner2.adapter=majorAdapter
+                        major_spinner2.setSelection(majorAdapter.count)
+                        major_spinner2.dropDownVerticalOffset=dipToPixels(30f).toInt()
+                        major_spinner2.onItemSelectedListener=object:AdapterView.OnItemSelectedListener {
+                            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                                when (position) {
+                                    0 -> {
+                                    }
+                                    1 -> {
+                                    }
+                                    2 -> {
+                                    }
+                                    3 -> {
+                                    }
+                                    4 -> {
+                                    }
+                                }
+                            }
+                            override fun onNothingSelected(parent: AdapterView<*>?) {
+                                Log.d("MyTag", "onNothingSelected")                            }
+                        }
+                    }
+                    2 ->{
+                        majorAdapter.clear()
+                        majorAdapter.addAll(items_major_sahoe.toMutableList())
+                        majorAdapter.add("학과 / 학부")
+                        major_spinner2.adapter=majorAdapter
+                        major_spinner2.setSelection(majorAdapter.count)
+                        major_spinner2.dropDownVerticalOffset=dipToPixels(30f).toInt()
+                        major_spinner2.onItemSelectedListener=object:AdapterView.OnItemSelectedListener {
+                            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                                when (position) {
+                                    0 -> {
+                                    }
+                                    1 -> {
+                                    }
+                                    2 -> {
+                                    }
+                                    3 -> {
+                                    }
+                                }
+                            }
+                            override fun onNothingSelected(parent: AdapterView<*>?) {
+                                Log.d("MyTag", "onNothingSelected")                            }
+                        }
+                    }
+                    3 ->{
+                        majorAdapter.clear()
+                        majorAdapter.addAll(items_major_global.toMutableList())
+                        majorAdapter.add("학과 / 학부")
+                        major_spinner2.adapter=majorAdapter
+                        major_spinner2.setSelection(majorAdapter.count)
+                        major_spinner2.dropDownVerticalOffset=dipToPixels(30f).toInt()
+                        major_spinner2.onItemSelectedListener=object:AdapterView.OnItemSelectedListener {
+                            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                                when (position) {
+                                    0 -> {
+                                    }
+                                    1 -> {
+                                    }
+                                    2 -> {
+                                    }
+                                    3 -> {
+                                    }
+                                    4 -> {
+                                    }
+                                }
+                            }
+                            override fun onNothingSelected(parent: AdapterView<*>?) {
+                                Log.d("MyTag", "onNothingSelected")                            }
+                        }
+                    }
+                    4 ->{
+                        majorAdapter.clear()
+                        majorAdapter.addAll(items_major_gong.toMutableList())
+                        majorAdapter.add("학과 / 학부")
+                        major_spinner2.adapter=majorAdapter
+                        major_spinner2.setSelection(majorAdapter.count)
+                        major_spinner2.dropDownVerticalOffset=dipToPixels(30f).toInt()
+                        major_spinner2.onItemSelectedListener=object:AdapterView.OnItemSelectedListener {
+                            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                                when (position) {
+                                    0 -> {
+                                    }
+                                    1 -> {
+                                    }
+                                    2 -> {
+                                    }
+                                    3 -> {
+                                    }
+                                    4 -> {
+                                    }
+                                    5 -> {
+                                    }
+                                    6 -> {
+                                    }
+                                    7 -> {
+                                    }
+                                }
+                            }
+                            override fun onNothingSelected(parent: AdapterView<*>?) {
+                                Log.d("MyTag", "onNothingSelected")                            }
+                        }
+                    }
+                    5 ->{
+                        majorAdapter.clear()
+                        majorAdapter.addAll(items_major_jeongbo.toMutableList())
+                        majorAdapter.add("학과 / 학부")
+                        major_spinner2.adapter=majorAdapter
+                        major_spinner2.setSelection(majorAdapter.count)
+                        major_spinner2.dropDownVerticalOffset=dipToPixels(30f).toInt()
+                        major_spinner2.onItemSelectedListener=object:AdapterView.OnItemSelectedListener {
+                            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                                when (position) {
+                                    0 -> {
+                                    }
+                                    1 -> {
+                                    }
+                                    2 -> {
+                                    }
+                                }
+                            }
+                            override fun onNothingSelected(parent: AdapterView<*>?) {
+                                Log.d("MyTag", "onNothingSelected")                            }
+                        }
+                    }
+                    6 ->{
+                        majorAdapter.clear()
+                        majorAdapter.addAll(items_major_gyeongyeong.toMutableList())
+                        majorAdapter.add("학과 / 학부")
+                        major_spinner2.adapter=majorAdapter
+                        major_spinner2.setSelection(majorAdapter.count)
+                        major_spinner2.dropDownVerticalOffset=dipToPixels(30f).toInt()
+                        major_spinner2.onItemSelectedListener=object:AdapterView.OnItemSelectedListener {
+                            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                                when (position) {
+                                    0 -> {
+                                    }
+                                    1 -> {
+                                    }
+                                    2 -> {
+                                    }
+                                }
+                            }
+                            override fun onNothingSelected(parent: AdapterView<*>?) {
+                                Log.d("MyTag", "onNothingSelected")                            }
+                        }
+                    }
+                    7 ->{
+                        majorAdapter.clear()
+                        majorAdapter.addAll(items_major_yesul.toMutableList())
+                        majorAdapter.add("학과 / 학부")
+                        major_spinner2.adapter=majorAdapter
+                        major_spinner2.setSelection(majorAdapter.count)
+                        major_spinner2.dropDownVerticalOffset=dipToPixels(30f).toInt()
+                        major_spinner2.onItemSelectedListener=object:AdapterView.OnItemSelectedListener {
+                            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                                when (position) {
+                                    0 -> {
+                                    }
+                                    1 -> {
+                                    }
+                                    2 -> {
+                                    }
+                                    3 -> {
+                                    }
+                                    4 -> {
+                                    }
+                                    5 -> {
+                                    }
+                                }
+                            }
+                            override fun onNothingSelected(parent: AdapterView<*>?) {
+                                Log.d("MyTag", "onNothingSelected")                            }
+                        }
+                    }
+                    8 ->{
+                        majorAdapter.clear()
+                        majorAdapter.addAll(items_major_sabeom.toMutableList())
+                        majorAdapter.add("학과 / 학부")
+                        major_spinner2.adapter=majorAdapter
+                        major_spinner2.setSelection(majorAdapter.count)
+                        major_spinner2.dropDownVerticalOffset=dipToPixels(30f).toInt()
+                        major_spinner2.onItemSelectedListener=object:AdapterView.OnItemSelectedListener {
+                            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                                when (position) {
+                                    0 -> {
+                                    }
+                                    1 -> {
+                                    }
+                                    2 -> {
+                                    }
+                                    3 -> {
+                                    }
+                                    4 -> {
+                                    }
+                                    5 -> {
+                                    }
+                                    6 -> {
+                                    }
+                                    7 ->{
+                                    }
+                                }
+                            }
+                            override fun onNothingSelected(parent: AdapterView<*>?) {
+                                Log.d("MyTag", "onNothingSelected")                            }
+                        }
+                    }
+                    9 ->{
+                        majorAdapter.clear()
+                        majorAdapter.addAll(items_major_dosi.toMutableList())
+                        majorAdapter.add("학과 / 학부")
+                        major_spinner2.adapter=majorAdapter
+                        major_spinner2.setSelection(majorAdapter.count)
+                        major_spinner2.dropDownVerticalOffset=dipToPixels(30f).toInt()
+                        major_spinner2.onItemSelectedListener=object:AdapterView.OnItemSelectedListener {
+                            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                                when (position) {
+                                    0 -> {
+                                    }
+                                    1 -> {
+                                    }
+                                    2 -> {
+                                    }
+                                    3 -> {
+                                    }
+                                    4 -> {
+                                    }
+                                    5 -> {
+                                    }
+                                    6 -> {
+                                    }
+                                }
+                            }
+                            override fun onNothingSelected(parent: AdapterView<*>?) {
+                                Log.d("MyTag", "onNothingSelected")                            }
+                        }
+                    }
+                    10 ->{
+                        majorAdapter.clear()
+                        majorAdapter.addAll(items_major_saengmyeong.toMutableList())
+                        majorAdapter.add("학과 / 학부")
+                        major_spinner2.adapter=majorAdapter
+                        major_spinner2.setSelection(majorAdapter.count)
+                        major_spinner2.dropDownVerticalOffset=dipToPixels(30f).toInt()
+                        major_spinner2.onItemSelectedListener=object:AdapterView.OnItemSelectedListener {
+                            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                                when (position) {
+                                    0 -> {
+                                    }
+                                    1 -> {
+                                    }
+                                    2 -> {
+                                    }
+                                    3 -> {
+                                    }
+                                }
+                            }
+                            override fun onNothingSelected(parent: AdapterView<*>?) {
+                                Log.d("MyTag", "onNothingSelected")                            }
+                        }
+                    }
+                    11 ->{
+                        majorAdapter.clear()
+                        majorAdapter.addAll(items_major_dongbuga.toMutableList())
+                        majorAdapter.add("학과 / 학부")
+                        major_spinner2.adapter=majorAdapter
+                        major_spinner2.setSelection(majorAdapter.count)
+                        major_spinner2.dropDownVerticalOffset=dipToPixels(30f).toInt()
+                        major_spinner2.onItemSelectedListener=object:AdapterView.OnItemSelectedListener {
+                            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                                when (position) {
+                                    0 -> {
+                                    }
+                                    1 -> {
+                                    }
+                                }
+                            }
+                            override fun onNothingSelected(parent: AdapterView<*>?) {
+                                Log.d("MyTag", "onNothingSelected")                            }
+                        }
+                    }
+                    12 ->{
+                        majorAdapter.clear()
+                        majorAdapter.addAll(items_major_beob.toMutableList())
+                        majorAdapter.add("학과 / 학부")
+                        major_spinner2.adapter=majorAdapter
+                        major_spinner2.setSelection(majorAdapter.count)
+                        major_spinner2.dropDownVerticalOffset=dipToPixels(30f).toInt()
+                        major_spinner2.onItemSelectedListener=object:AdapterView.OnItemSelectedListener {
+                            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                                when (position) {
+                                    0 -> {
+                                    }
+                                }
+                            }
+                            override fun onNothingSelected(parent: AdapterView<*>?) {
+                                Log.d("MyTag", "onNothingSelected")                            }
+                        }
+                    }
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                Log.d("MyTag", "onNothingSelected")            }
+
+        }
         // intent 전환
         val next_intent = findViewById(R.id.button_next) as ImageButton
         next_intent.setOnClickListener {
@@ -23,215 +421,13 @@ class SettingActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // Spinner
-        val spinner1: Spinner = findViewById(R.id.major_spinner1) as Spinner
-        val spinner2: Spinner = findViewById(R.id.major_spinner2) as Spinner
-        adapter1 = ArrayAdapter.createFromResource(this, R.array.arr_uni, android.R.layout.simple_spinner_dropdown_item)
-        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spinner1.setAdapter(adapter1)
-        spinner1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
-                if (adapter1.getItem(i) == "인문대학") {
-
-                    choice_uni = "인문대학" //버튼 클릭시 출력을 위해 값을 넣었습니다.
-                    adapter2 = ArrayAdapter.createFromResource(this@SettingActivity, R.array.arr_inmun, android.R.layout.simple_spinner_dropdown_item)
-
-                    adapter2!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    spinner2.setAdapter(adapter2)
-                    spinner2.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-                        override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
-                            choice_major = adapter2!!.getItem(i).toString()
-                        }
-
-                        override fun onNothingSelected(adapterView: AdapterView<*>?) {
-                            Toast.makeText(this@SettingActivity, "소속학과를 선택해주세요!", Toast.LENGTH_SHORT).show()
-                        }
-                    })
-                } else if (adapter1.getItem(i) == "자연과학대학") {
-                    choice_uni = "자연과학대학"
-                    adapter2 = ArrayAdapter.createFromResource(this@SettingActivity, R.array.arr_jayeon, android.R.layout.simple_spinner_dropdown_item)
-                    adapter2!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    spinner2.setAdapter(adapter2)
-                    spinner2.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-                        override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
-                            choice_major = adapter2!!.getItem(i).toString()
-                        }
-
-                        override fun onNothingSelected(adapterView: AdapterView<*>?) {
-                            Toast.makeText(this@SettingActivity, "소속학과를 선택해주세요!", Toast.LENGTH_SHORT).show()
-
-                        }
-                    })
-                } else if (adapter1.getItem(i) == "사회과학대학") {
-                    choice_uni = "사회과학대학"
-                    adapter2 = ArrayAdapter.createFromResource(this@SettingActivity, R.array.arr_sahoe, android.R.layout.simple_spinner_dropdown_item)
-                    adapter2!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    spinner2.setAdapter(adapter2)
-                    spinner2.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-                        override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
-                            choice_major = adapter2!!.getItem(i).toString()
-                        }
-
-                        override fun onNothingSelected(adapterView: AdapterView<*>?) {
-                            Toast.makeText(this@SettingActivity, "소속학과를 선택해주세요!", Toast.LENGTH_SHORT).show()
-
-                        }
-                    })
-                } else if (adapter1.getItem(i) == "글로벌정경대학") {
-                    choice_uni = "글로벌정경대학"
-                    adapter2 = ArrayAdapter.createFromResource(this@SettingActivity, R.array.arr_global, android.R.layout.simple_spinner_dropdown_item)
-                    adapter2!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    spinner2.setAdapter(adapter2)
-                    spinner2.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-                        override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
-                            choice_major = adapter2!!.getItem(i).toString()
-                        }
-
-                        override fun onNothingSelected(adapterView: AdapterView<*>?) {
-                            Toast.makeText(this@SettingActivity, "소속학과를 선택해주세요!", Toast.LENGTH_SHORT).show()
-
-                        }
-                    })
-                } else if (adapter1.getItem(i) == "공과대학") {
-                    choice_uni = "공과대학"
-                    adapter2 = ArrayAdapter.createFromResource(this@SettingActivity, R.array.arr_gong, android.R.layout.simple_spinner_dropdown_item)
-                    adapter2!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    spinner2.setAdapter(adapter2)
-                    spinner2.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-                        override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
-                            choice_major = adapter2!!.getItem(i).toString()
-                        }
-
-                        override fun onNothingSelected(adapterView: AdapterView<*>?) {
-                            Toast.makeText(this@SettingActivity, "소속학과를 선택해주세요!", Toast.LENGTH_SHORT).show()
-
-                        }
-                    })
-                } else if (adapter1.getItem(i) == "정보기술대학") {
-                    choice_uni = "정보기술대학"
-                    adapter2 = ArrayAdapter.createFromResource(this@SettingActivity, R.array.arr_jeongbo, android.R.layout.simple_spinner_dropdown_item)
-                    adapter2!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    spinner2.setAdapter(adapter2)
-                    spinner2.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-                        override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
-                            choice_major = adapter2!!.getItem(i).toString()
-                        }
-
-                        override fun onNothingSelected(adapterView: AdapterView<*>?) {
-                            Toast.makeText(this@SettingActivity, "소속학과를 선택해주세요!", Toast.LENGTH_SHORT).show()
-
-                        }
-                    })
-                } else if (adapter1.getItem(i) == "경영대학") {
-                    choice_uni = "경영대학"
-                    adapter2 = ArrayAdapter.createFromResource(this@SettingActivity, R.array.arr_gyeongyeong, android.R.layout.simple_spinner_dropdown_item)
-                    adapter2!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    spinner2.setAdapter(adapter2)
-                    spinner2.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-                        override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
-                            choice_major = adapter2!!.getItem(i).toString()
-                        }
-
-                        override fun onNothingSelected(adapterView: AdapterView<*>?) {
-                            Toast.makeText(this@SettingActivity, "소속학과를 선택해주세요!", Toast.LENGTH_SHORT).show()
-
-                        }
-                    })
-                } else if (adapter1.getItem(i) == "예술체육대학") {
-                    choice_uni = "예술체육대학"
-                    adapter2 = ArrayAdapter.createFromResource(this@SettingActivity, R.array.arr_yesul, android.R.layout.simple_spinner_dropdown_item)
-                    adapter2!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    spinner2.setAdapter(adapter2)
-                    spinner2.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-                        override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
-                            choice_major = adapter2!!.getItem(i).toString()
-                        }
-
-                        override fun onNothingSelected(adapterView: AdapterView<*>?) {
-                            Toast.makeText(this@SettingActivity, "소속학과를 선택해주세요!", Toast.LENGTH_SHORT).show()
-
-                        }
-                    })
-                } else if (adapter1.getItem(i) == "사범대학") {
-                    choice_uni = "사범대학"
-                    adapter2 = ArrayAdapter.createFromResource(this@SettingActivity, R.array.arr_sabeom, android.R.layout.simple_spinner_dropdown_item)
-                    adapter2!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    spinner2.setAdapter(adapter2)
-                    spinner2.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-                        override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
-                            choice_major = adapter2!!.getItem(i).toString()
-                        }
-
-                        override fun onNothingSelected(adapterView: AdapterView<*>?) {
-                            Toast.makeText(this@SettingActivity, "소속학과를 선택해주세요!", Toast.LENGTH_SHORT).show()
-
-                        }
-                    })
-                } else if (adapter1.getItem(i) == "도시과학대학") {
-                    choice_uni = "도시과학대학"
-                    adapter2 = ArrayAdapter.createFromResource(this@SettingActivity, R.array.arr_dosi, android.R.layout.simple_spinner_dropdown_item)
-                    adapter2!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    spinner2.setAdapter(adapter2)
-                    spinner2.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-                        override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
-                            choice_major = adapter2!!.getItem(i).toString()
-                        }
-
-                        override fun onNothingSelected(adapterView: AdapterView<*>?) {
-                            Toast.makeText(this@SettingActivity, "소속학과를 선택해주세요!", Toast.LENGTH_SHORT).show()
-
-                        }
-                    })
-                } else if (adapter1.getItem(i) == "생명과학기술대학") {
-                    choice_uni = "생명과학기술대학"
-                    adapter2 = ArrayAdapter.createFromResource(this@SettingActivity, R.array.arr_saengmyeong, android.R.layout.simple_spinner_dropdown_item)
-                    adapter2!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    spinner2.setAdapter(adapter2)
-                    spinner2.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-                        override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
-                            choice_major = adapter2!!.getItem(i).toString()
-                        }
-
-                        override fun onNothingSelected(adapterView: AdapterView<*>?) {
-                            Toast.makeText(this@SettingActivity, "소속학과를 선택해주세요!", Toast.LENGTH_SHORT).show()
-
-                        }
-                    })
-                } else if (adapter1.getItem(i) == "동북아국제통상대학") {
-                    choice_uni = "동북아국제통상대학"
-                    adapter2 = ArrayAdapter.createFromResource(this@SettingActivity, R.array.arr_dongbuga, android.R.layout.simple_spinner_dropdown_item)
-                    adapter2!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    spinner2.setAdapter(adapter2)
-                    spinner2.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-                        override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
-                            choice_major = adapter2!!.getItem(i).toString()
-                        }
-
-                        override fun onNothingSelected(adapterView: AdapterView<*>?) {
-                            Toast.makeText(this@SettingActivity, "소속학과를 선택해주세요!", Toast.LENGTH_SHORT).show()
-
-                        }
-                    })
-                } else if (adapter1.getItem(i) == "법학부") {
-                    choice_uni = "법학부"
-                    adapter2 = ArrayAdapter.createFromResource(this@SettingActivity, R.array.arr_beob, android.R.layout.simple_spinner_dropdown_item)
-                    adapter2!!.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    spinner2.setAdapter(adapter2)
-                    spinner2.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-                        override fun onItemSelected(adapterView: AdapterView<*>?, view: View, i: Int, l: Long) {
-                            choice_major = adapter2!!.getItem(i).toString()
-                        }
-
-                        override fun onNothingSelected(adapterView: AdapterView<*>?) {
-                            Toast.makeText(this@SettingActivity, "소속학과를 선택해주세요!", Toast.LENGTH_SHORT).show()
-                        }
-                    })
-                }
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
-        }
     }
+    private fun dipToPixels(dipValue: Float): Float {
+        return TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                dipValue,
+                resources.displayMetrics
+        )
+    }
+
 }

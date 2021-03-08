@@ -13,24 +13,30 @@ import com.example.gaegang.dataClass.Recommended
 class RecommendAdapter(val context: Context, val recList : ArrayList<Recommended>) :
 RecyclerView.Adapter<RecommendAdapter.Holder>() {
 
-    /* 라벨, 강의이름, 교수이름, 이수구분, 수업방법, 요일, 시간 */
+
+    /*
+    * 강의명 / 교수명
+    * 이수구분 / 학점
+    * 수업방법 (온라인/오프라인)
+    * 시간 / 강의실
+    */
     inner class Holder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
-        val label = itemView?.findViewById<TextView>(R.id.text_label)
         val lecture = itemView?.findViewById<TextView>(R.id.text_lecture)
         val professor = itemView?.findViewById<TextView>(R.id.text_professor)
         val classification = itemView?.findViewById<TextView>(R.id.text_classification)
+        val credit = itemView?.findViewById<TextView>(R.id.text_credit)
         val teaching_method = itemView?.findViewById<TextView>(R.id.text_teaching_method)
-        val week = itemView?.findViewById<TextView>(R.id.text_week)
         val time = itemView?.findViewById<TextView>(R.id.text_time)
+        val classroom = itemView?.findViewById<TextView>(R.id.text_classroom)
 
         fun bind(rec: Recommended, context: Context) {
-            label?.text = rec.label
             lecture?.text = rec.lecture
             professor?.text = rec.professor
             classification?.text = rec.classification
+            credit?.text=rec.credit
             teaching_method?.text = rec.teaching_method
-            week?.text = rec.week
             time?.text = rec.time
+            classroom?.text=rec.classroom
         }
     }
 
@@ -40,7 +46,7 @@ RecyclerView.Adapter<RecommendAdapter.Holder>() {
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder?.bind(recList[position], context)
+        holder.bind(recList[position], context)
     }
 
     override fun getItemCount(): Int {
