@@ -115,7 +115,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout_select1">
 
-        <LinearLayout
+        <!--LinearLayout
             android:id="@+id/layout_select_2_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -1236,7 +1236,8 @@
             </TableRow>
 
 
-        </TableLayout>
+        </TableLayout-->
+
     </LinearLayout>
 
     <LinearLayout
