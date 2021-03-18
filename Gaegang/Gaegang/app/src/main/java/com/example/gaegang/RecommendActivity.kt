@@ -14,8 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gaegang.adapter.RecommendAdapter
-import com.example.gaegang.dataClass.Recommended
-import com.example.gaegang.dataClass.Test
+import com.example.gaegang.dataClass.RecommendedItem
 import kotlinx.android.synthetic.main.activity_recommend.*
 import retrofit2.Call
 import retrofit2.Response
@@ -31,44 +30,44 @@ class RecommendActivity : AppCompatActivity() {
     * 수업방법 (온라인/오프라인)
     * 시간 / 강의실
     */
-    var recList = arrayListOf<Recommended>(
-        Recommended("역사로만나는중국의문화코드","조형진",
+    var recList = arrayListOf<RecommendedItem>(
+        RecommendedItem("역사로만나는중국의문화코드","조형진",
                 "교양선택","3",
                 "온라인(동영상+화상)",
                 "화(5B-6)(7-8A)","SM108"),
-        Recommended("역사로만나는중국의문화코드","송승석",
+        RecommendedItem("역사로만나는중국의문화코드","송승석",
                 "교양선택","3",
                 "온라인(동영상+화상)",
                 "화(5B-6)(7-8A)","SM303") ,
-        Recommended("중국어1","주기평",
+        RecommendedItem("중국어1","주기평",
                 "교양필수","3",
                 "온라인(동영상)",
                 "월(7-8A)(8B-9)","SM205") ,
-        Recommended("중국어1","주기평",
+        RecommendedItem("중국어1","주기평",
                 "교양필수","3",
                 "온라인(동영상)",
                 "월(야1)(야2)(야3)","SM205") ,
-        Recommended("중국어1","안성재",
+        RecommendedItem("중국어1","안성재",
                 "교양필수","3",
                 "온라인(동영상)",
                 "월(4-5A),화(4-5A)","SM506") ,
-        Recommended("(이공계를위한)중국과학기술의10가지기적","이정희",
+        RecommendedItem("(이공계를위한)중국과학기술의10가지기적","이정희",
                 "교양선택","3",
                 "온라인(화상)+오프라인",
                 "금(2B-3)(4-5A)","SM503") ,
-        Recommended("영상으로만나는중국","이정희",
+        RecommendedItem("영상으로만나는중국","이정희",
                 "교양선택","3",
                 "온라인(화상)+오프라인",
                 "수(1-2A)(2B-3)","SM503") ,
-        Recommended("영상으로만나는중국","이정희",
+        RecommendedItem("영상으로만나는중국","이정희",
                 "교양선택","3",
                 "온라인(화상)+오프라인",
                 "목(5B-6)(7-8A)","SM503") ,
-        Recommended("현대중국의이해","우병국",
+        RecommendedItem("현대중국의이해","우병국",
                 "교양선택","3",
                 "온라인(화상)",
                 "금(1-2A)(2B-3)","SM506") ,
-        Recommended("현대중국의이해","우병국",
+        RecommendedItem("현대중국의이해","우병국",
                 "교양선택","3",
                 "온라인(화상)",
                 "금(5B-6)(7-8A)","SM506")
@@ -79,7 +78,7 @@ class RecommendActivity : AppCompatActivity() {
 
     lateinit var mRetrofit: Retrofit
     lateinit var mRetrofitAPI: RetrofitAPI
-    lateinit var mCallTodoList: retrofit2.Call<Recommended>
+    lateinit var mCallTodoList: retrofit2.Call<RecommendedItem>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -136,14 +135,14 @@ class RecommendActivity : AppCompatActivity() {
     }
 
     // http요청을 보냈고 이건 응답을 받을 콜벡메서드
-    private val mRetrofitCallback = (object : retrofit2.Callback<Recommended> {
-        override fun onFailure(call: Call<Recommended>, t: Throwable) {
+    private val mRetrofitCallback = (object : retrofit2.Callback<RecommendedItem> {
+        override fun onFailure(call: Call<RecommendedItem>, t: Throwable) {
             t.printStackTrace()
             Log.d(TAG, "에러입니다. => ${t.message.toString()}")
 
         }
 
-        override fun onResponse(call: Call<Recommended>, response: Response<Recommended>) {
+        override fun onResponse(call: Call<RecommendedItem>, response: Response<RecommendedItem>) {
             val result = response.body()
             Log.d(TAG, "결과는 => $result")
 

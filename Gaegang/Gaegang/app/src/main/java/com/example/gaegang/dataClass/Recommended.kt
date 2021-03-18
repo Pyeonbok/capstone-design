@@ -1,11 +1,8 @@
 package com.example.gaegang.dataClass
 
 
-data class Test(val class1:Recommended,
-                val class2:Recommended,
-                val class3:Recommended){
 
-}
+class Recommended : ArrayList<RecommendedItem>()
 
 /*
    * 강의명 / 교수명
@@ -14,7 +11,7 @@ data class Test(val class1:Recommended,
    * 시간 / 강의실
    */
 
-data class Recommended (
+data class RecommendedItem (
     val lecture:String, val professor:String,
     val classification:String, val credit:String,
     val teaching_method:String,
