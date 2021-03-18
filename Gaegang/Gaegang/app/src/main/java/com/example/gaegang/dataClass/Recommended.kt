@@ -1,5 +1,12 @@
 package com.example.gaegang.dataClass
 
+
+data class Test(val class1:Recommended,
+                val class2:Recommended,
+                val class3:Recommended){
+
+}
+
 /*
    * 강의명 / 교수명
    * 이수구분 / 학점

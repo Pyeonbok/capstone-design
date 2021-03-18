@@ -28,7 +28,7 @@
             android:id="@+id/textView12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="5dp"
             android:fontFamily="@font/ridibatang"
             android:text="|"
             android:textColor="@color/black" />
@@ -37,7 +37,7 @@
             android:id="@+id/text_professor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="5dp"
             android:fontFamily="@font/ridibatang"
             android:text="교수명"
             android:textColor="@color/black" />
@@ -63,7 +63,7 @@
             android:id="@+id/textView13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="5dp"
             android:fontFamily="@font/ridibatang"
             android:text="|"
             android:textColor="@color/black" />
@@ -72,7 +72,7 @@
             android:id="@+id/text_credit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="5dp"
             android:fontFamily="@font/ridibatang"
             android:text="학점"
             android:textColor="@color/black" />
@@ -117,7 +117,7 @@
             android:id="@+id/textView14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="5dp"
             android:fontFamily="@font/ridibatang"
             android:text="|"
             android:textColor="@color/black" />
@@ -126,7 +126,7 @@
             android:id="@+id/text_classroom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="5dp"
             android:fontFamily="@font/ridibatang"
             android:text="강의실"
             android:textColor="@color/black" />

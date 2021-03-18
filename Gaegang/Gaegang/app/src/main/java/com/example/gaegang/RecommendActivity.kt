@@ -82,6 +82,13 @@ class RecommendActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val next_intent = findViewById(R.id.button_next) as ImageButton
+        next_intent.setOnClickListener {
+            val intent= Intent(this,TimeTableActivity::class.java)
+            startActivity(intent)
+        }
+
+
         // textView (stt) 값 전달받기
         val getintent = getIntent()
         if (getintent.hasExtra("textStt")){

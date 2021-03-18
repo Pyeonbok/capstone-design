@@ -82,6 +82,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layout_stt"
+        android:textColor="@color/grey_1"
         android:text="※ 가장 연관도가 높은 순으로 결과가 출력됩니다."/>
 
 
@@ -115,12 +116,22 @@
             android:id="@+id/button_prev"
             android:layout_width="90dp"
             android:layout_height="90dp"
-            android:layout_marginEnd="10dp"
             android:layout_marginBottom="10dp"
             android:adjustViewBounds="true"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             android:src="@drawable/prev"/>
+
+        <ImageButton
+            android:id="@+id/button_next"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/next"/>
 
 
     </LinearLayout>
