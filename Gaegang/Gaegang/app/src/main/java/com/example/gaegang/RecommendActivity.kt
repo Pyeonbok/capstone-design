@@ -79,14 +79,16 @@ class RecommendActivity : AppCompatActivity() {
 
     lateinit var mRetrofit: Retrofit
     lateinit var mRetrofitAPI: RetrofitAPI
-    lateinit var mCallTodoList: retrofit2.Call<Test>
+    lateinit var mCallTodoList: retrofit2.Call<Recommended>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recommend)
 
+
         setRetrofit()
+        callTodoList()
 
         // intent 전환
         val prev_intent = findViewById(R.id.button_prev) as ImageButton
@@ -98,7 +100,6 @@ class RecommendActivity : AppCompatActivity() {
         val next_intent = findViewById(R.id.button_next) as ImageButton
         next_intent.setOnClickListener {
             val intent= Intent(this,TimeTableActivity::class.java)
-            callTodoList()
             startActivity(intent)
         }
 
@@ -126,23 +127,23 @@ class RecommendActivity : AppCompatActivity() {
         mCallTodoList.enqueue(mRetrofitCallback)
     }
 
-    // 나중에 음성인식 결과로 바꾸고 ㄱㄱ 
-    // 테스트중
+    // 음성 인식 결과 text
     private fun getSttString(): String {
+      //  var result = findViewById<TextView>(R.id.text_stt2)
         var result = findViewById<TextView>(R.id.text_non0)
 
         return result.text.toString()
     }
 
     // http요청을 보냈고 이건 응답을 받을 콜벡메서드
-    private val mRetrofitCallback = (object : retrofit2.Callback<Test> {
-        override fun onFailure(call: Call<Test>, t: Throwable) {
+    private val mRetrofitCallback = (object : retrofit2.Callback<Recommended> {
+        override fun onFailure(call: Call<Recommended>, t: Throwable) {
             t.printStackTrace()
             Log.d(TAG, "에러입니다. => ${t.message.toString()}")
 
         }
 
-        override fun onResponse(call: Call<Test>, response: Response<Test>) {
+        override fun onResponse(call: Call<Recommended>, response: Response<Recommended>) {
             val result = response.body()
             Log.d(TAG, "결과는 => $result")
 

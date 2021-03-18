@@ -15,7 +15,7 @@ data class Test(val class1:Recommended,
    */
 
 data class Recommended (
-    var lecture:String, var professor:String,
-    var classification:String, var credit:String,
-    var teaching_method:String,
-    var time:String, var classroom:String)
+    val lecture:String, val professor:String,
+    val classification:String, val credit:String,
+    val teaching_method:String,
+    val time:String, val classroom:String){}

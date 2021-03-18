@@ -46,13 +46,31 @@ class SearchActivity : AppCompatActivity() {
             }
         }
 
+        /*
         // intent 전환
         val next_intent = findViewById(id.button_next) as ImageButton
         next_intent.setOnClickListener {
-            val intent= Intent(this,RecommendActivity::class.java)
+            val intent = Intent(this, RecommendActivity::class.java)
+            if (textView!!.text == "※ 이 곳에 음성 인식 결과가 나타납니다.") {
+                Toast.makeText(applicationContext, "음성 인식 결과가 없습니다.",
+                    Toast.LENGTH_SHORT).show()
+            } else {
+                intent.putExtra("textStt", textView!!.text)
+                startActivity(intent)
+            }
+        }
+
+        */
+
+        // test용 intent (음성인식 못할 때 ㅠ)
+        val next_intent = findViewById(id.button_next) as ImageButton
+        next_intent.setOnClickListener {
+            val intent = Intent(this, RecommendActivity::class.java)
             intent.putExtra("textStt", textView!!.text)
             startActivity(intent)
+
         }
+
 
         val prev_intent = findViewById(id.button_prev) as ImageButton
         prev_intent.setOnClickListener {
