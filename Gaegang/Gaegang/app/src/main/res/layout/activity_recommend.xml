@@ -83,7 +83,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layout_stt"
         android:textColor="@color/grey_1"
-        android:text="※ 가장 연관도가 높은 순으로 결과가 출력됩니다."/>
+        android:text="중국 관련 교양 추천해 줘"/>
 
 
     <androidx.recyclerview.widget.RecyclerView

@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity() {
         //레트로핏으로 가져올 url설정하고 세팅
         mRetrofit = Retrofit
             .Builder()
-            .baseUrl("http://192.168.0.20:5000/")
+            .baseUrl("http://192.168.0.9:5000/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
