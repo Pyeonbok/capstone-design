@@ -1,42 +1,53 @@
 package com.example.gaegang.adapter
 
 import android.content.Context
-import android.system.Os.bind
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gaegang.R
-import com.example.gaegang.dataClass.Recommended
+import com.example.gaegang.dataClass.RecommendedItem
 
-class RecommendAdapter(val context: Context, val recList : ArrayList<Recommended>) :
+class RecommendAdapter(val context: Context, val recList: ArrayList<RecommendedItem>) :
 RecyclerView.Adapter<RecommendAdapter.Holder>() {
 
 
     /*
-    * 강의명 / 교수명
-    * 이수구분 / 학점
-    * 수업방법 (온라인/오프라인)
-    * 시간 / 강의실
+    * 강의명
+    * 교수명
+    * 학수번호
+    * 대학(원)
+    * 학과(부)
+    * 이수구분
+    * 학년
+    * 학점
+    * 수업방법
+    * 시간,강의실
     */
     inner class Holder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
         val lecture = itemView?.findViewById<TextView>(R.id.text_lecture)
         val professor = itemView?.findViewById<TextView>(R.id.text_professor)
+        val number = itemView?.findViewById<TextView>(R.id.text_number)
+        val uni = itemView?.findViewById<TextView>(R.id.text_uni)
+        val major = itemView?.findViewById<TextView>(R.id.text_major)
         val classification = itemView?.findViewById<TextView>(R.id.text_classification)
+        val grade = itemView?.findViewById<TextView>(R.id.text_grade)
         val credit = itemView?.findViewById<TextView>(R.id.text_credit)
         val teaching_method = itemView?.findViewById<TextView>(R.id.text_teaching_method)
         val time = itemView?.findViewById<TextView>(R.id.text_time)
-        val classroom = itemView?.findViewById<TextView>(R.id.text_classroom)
 
-        fun bind(rec: Recommended, context: Context) {
+        fun bind(rec: RecommendedItem, context: Context) {
             lecture?.text = rec.lecture
             professor?.text = rec.professor
+            number?.text = rec.number
+            uni?.text = rec.uni
+            major?.text = rec.major
             classification?.text = rec.classification
+            grade?.text=rec.grade
             credit?.text=rec.credit
             teaching_method?.text = rec.teaching_method
             time?.text = rec.time
-            classroom?.text=rec.classroom
         }
     }
 
