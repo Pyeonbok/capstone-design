@@ -93,11 +93,11 @@ class RecommendActivity : AppCompatActivity() {
         // textView (stt) 값 전달받기
         val getintent = getIntent()
         if (getintent.hasExtra("textStt")){
-            text_stt2.text = getintent.getStringExtra("textStt")
+           // text_stt2.text = getintent.getStringExtra("textStt")
             stt_text = getintent.getStringExtra("textStt").toString()
+            text_stt2.text=stt_text
         } else {
         }
-
 
         // recyclerview
         val mAdapter = RecommendAdapter(this, recList)
