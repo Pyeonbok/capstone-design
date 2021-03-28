@@ -23,7 +23,7 @@
           > android:text="※ 가장 연관도가 높은 순으로 결과가 출력됩니다." 주석처리
           > android:text="중국 관련 온라인 강의 추천해 줘" 사용
  
- - SearchActivity.kt
+     - SearchActivity.kt
           > 50~72줄
           > 50~60줄 부분 주석처리
           > 65~72줄 사용
