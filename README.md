@@ -9,8 +9,7 @@
 
 
 
-* 음성인식 못하는 경우 (avd 등) test 방법
-     (줄 번호는 변경될 수 있음.)
+* 음성인식 못하는 경우 (avd 등) test 방법 (ps.줄 번호는 변경될 수 있음.)
      - RecommendActivity.kt
           > 121~127줄 (getSttString() 부분)
           > var result = findViewById<TextView>(R.id.text_stt2) 주석처리
@@ -22,9 +21,9 @@
           > 86~87줄
           > android:text="※ 가장 연관도가 높은 순으로 결과가 출력됩니다." 주석처리
           > android:text="중국 관련 온라인 강의 추천해 줘" 사용
- 
-     - SearchActivity.kt
-          > 50~60줄 부분 주석처리
+      
+      - SearchActivity.kt
+          > 50~60줄 주석처리
           > 65~72줄 사용
   
      
