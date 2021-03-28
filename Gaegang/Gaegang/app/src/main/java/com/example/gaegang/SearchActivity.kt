@@ -46,7 +46,7 @@ class SearchActivity : AppCompatActivity() {
             }
         }
 
-        /*
+
         // intent 전환
         val next_intent = findViewById(id.button_next) as ImageButton
         next_intent.setOnClickListener {
@@ -60,8 +60,7 @@ class SearchActivity : AppCompatActivity() {
             }
         }
 
-        */
-
+        /*
         // test용 intent (음성인식 못할 때 ㅠ)
         val next_intent = findViewById(id.button_next) as ImageButton
         next_intent.setOnClickListener {
@@ -70,7 +69,7 @@ class SearchActivity : AppCompatActivity() {
             startActivity(intent)
 
         }
-
+*/
 
         val prev_intent = findViewById(id.button_prev) as ImageButton
         prev_intent.setOnClickListener {

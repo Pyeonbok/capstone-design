@@ -29,7 +29,6 @@ class RecommendActivity : AppCompatActivity() {
 * 수업방법
 * 시간,강의실
 */
-
     var recList = arrayListOf<RecommendedItem>(
         RecommendedItem("강의명","교수명","학수번호",
                 "대학(원)","학과(부)","이수구분",
@@ -70,14 +69,12 @@ class RecommendActivity : AppCompatActivity() {
     lateinit var mRetrofitAPI: RetrofitAPI
     lateinit var mCallTodoList: retrofit2.Call<RecommendedItem>
 
+    var stt_text = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recommend)
 
-
-        setRetrofit()
-        callTodoList()
 
         // intent 전환
         val prev_intent = findViewById(R.id.button_prev) as ImageButton
@@ -97,6 +94,7 @@ class RecommendActivity : AppCompatActivity() {
         val getintent = getIntent()
         if (getintent.hasExtra("textStt")){
             text_stt2.text = getintent.getStringExtra("textStt")
+            stt_text = getintent.getStringExtra("textStt").toString()
         } else {
         }
 
@@ -108,6 +106,9 @@ class RecommendActivity : AppCompatActivity() {
         val lm = LinearLayoutManager(this)
         recyclerview_rec.layoutManager = lm
         recyclerview_rec.setHasFixedSize(true)
+
+        setRetrofit()
+        callTodoList()
     }
 
     // 리스트를 불러온다.
@@ -118,10 +119,11 @@ class RecommendActivity : AppCompatActivity() {
 
     // 음성 인식 결과 text
     private fun getSttString(): String {
-      //  var result = findViewById<TextView>(R.id.text_stt2)
-        var result = findViewById<TextView>(R.id.text_non0)
+        var result = stt_text
+      //  var result = findViewById<TextView>(R.id.text_non0)   // test
 
-        return result.text.toString()
+        return result
+        // return result.text.toString()
     }
 
     // http요청을 보냈고 이건 응답을 받을 콜벡메서드
@@ -143,7 +145,7 @@ class RecommendActivity : AppCompatActivity() {
         //레트로핏으로 가져올 url설정하고 세팅
         mRetrofit = Retrofit
             .Builder()
-            .baseUrl("http://192.168.0.9:5000/")
+            .baseUrl("http://192.168.0.21:5000/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
