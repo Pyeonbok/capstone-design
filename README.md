@@ -20,8 +20,8 @@
 
      > activity_recommend.xml
           - 86~87줄
-          - android:text="※ 가장 연관도가 높은 순으로 결과가 출력됩니다."/> 주석처리
-          - android:text="중국 관련 온라인 강의 추천해 줘" /> 사용
+          - android:text="※ 가장 연관도가 높은 순으로 결과가 출력됩니다." 주석처리
+          - android:text="중국 관련 온라인 강의 추천해 줘" 사용
           - 주석처리 방법 : <!-- 내용 -->
      > SearchActivity.kt
           - 50~72줄
