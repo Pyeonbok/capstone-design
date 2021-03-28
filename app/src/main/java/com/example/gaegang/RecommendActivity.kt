@@ -13,6 +13,12 @@ import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.net.Inet4Address
+import java.net.InetAddress
+import java.net.NetworkInterface
+import java.net.SocketException
+import java.util.*
+
 
 class RecommendActivity : AppCompatActivity() {
 
@@ -30,37 +36,56 @@ class RecommendActivity : AppCompatActivity() {
 * 시간,강의실
 */
 
+    fun getLocalIpAddress(): String? {
+        try {
+            val en: Enumeration<NetworkInterface> = NetworkInterface.getNetworkInterfaces()
+            while (en.hasMoreElements()) {
+                val intf: NetworkInterface = en.nextElement()
+                val enumIpAddr: Enumeration<InetAddress> = intf.getInetAddresses()
+                while (enumIpAddr.hasMoreElements()) {
+                    val inetAddress: InetAddress = enumIpAddr.nextElement()
+                    if (!inetAddress.isLoopbackAddress() && inetAddress is Inet4Address) {
+                        return inetAddress.getHostAddress()
+                    }
+                }
+            }
+        } catch (ex: SocketException) {
+            ex.printStackTrace()
+        }
+        return null
+    }
+
     var recList = arrayListOf<RecommendedItem>(
-        RecommendedItem("강의명","교수명","학수번호",
-                "대학(원)","학과(부)","이수구분",
-                "학년", "학점","수업방법","시간,강의실"),
-        RecommendedItem("강의명","교수명","학수번호",
-            "대학(원)","학과(부)","이수구분",
-            "학년", "학점","수업방법","시간,강의실"),
-        RecommendedItem("강의명","교수명","학수번호",
-            "대학(원)","학과(부)","이수구분",
-            "학년", "학점","수업방법","시간,강의실"),
-        RecommendedItem("강의명","교수명","학수번호",
-            "대학(원)","학과(부)","이수구분",
-            "학년", "학점","수업방법","시간,강의실"),
-        RecommendedItem("강의명","교수명","학수번호",
-            "대학(원)","학과(부)","이수구분",
-            "학년", "학점","수업방법","시간,강의실"),
-        RecommendedItem("강의명","교수명","학수번호",
-            "대학(원)","학과(부)","이수구분",
-            "학년", "학점","수업방법","시간,강의실"),
-        RecommendedItem("강의명","교수명","학수번호",
-            "대학(원)","학과(부)","이수구분",
-            "학년", "학점","수업방법","시간,강의실"),
-        RecommendedItem("강의명","교수명","학수번호",
-            "대학(원)","학과(부)","이수구분",
-            "학년", "학점","수업방법","시간,강의실"),
-        RecommendedItem("강의명","교수명","학수번호",
-            "대학(원)","학과(부)","이수구분",
-            "학년", "학점","수업방법","시간,강의실"),
-        RecommendedItem("강의명","교수명","학수번호",
-            "대학(원)","학과(부)","이수구분",
-            "학년", "학점","수업방법","시간,강의실")
+            RecommendedItem("강의명", "교수명", "학수번호",
+                    "대학(원)", "학과(부)", "이수구분",
+                    "학년", "학점", "수업방법", "시간,강의실"),
+            RecommendedItem("강의명", "교수명", "학수번호",
+                    "대학(원)", "학과(부)", "이수구분",
+                    "학년", "학점", "수업방법", "시간,강의실"),
+            RecommendedItem("강의명", "교수명", "학수번호",
+                    "대학(원)", "학과(부)", "이수구분",
+                    "학년", "학점", "수업방법", "시간,강의실"),
+            RecommendedItem("강의명", "교수명", "학수번호",
+                    "대학(원)", "학과(부)", "이수구분",
+                    "학년", "학점", "수업방법", "시간,강의실"),
+            RecommendedItem("강의명", "교수명", "학수번호",
+                    "대학(원)", "학과(부)", "이수구분",
+                    "학년", "학점", "수업방법", "시간,강의실"),
+            RecommendedItem("강의명", "교수명", "학수번호",
+                    "대학(원)", "학과(부)", "이수구분",
+                    "학년", "학점", "수업방법", "시간,강의실"),
+            RecommendedItem("강의명", "교수명", "학수번호",
+                    "대학(원)", "학과(부)", "이수구분",
+                    "학년", "학점", "수업방법", "시간,강의실"),
+            RecommendedItem("강의명", "교수명", "학수번호",
+                    "대학(원)", "학과(부)", "이수구분",
+                    "학년", "학점", "수업방법", "시간,강의실"),
+            RecommendedItem("강의명", "교수명", "학수번호",
+                    "대학(원)", "학과(부)", "이수구분",
+                    "학년", "학점", "수업방법", "시간,강의실"),
+            RecommendedItem("강의명", "교수명", "학수번호",
+                    "대학(원)", "학과(부)", "이수구분",
+                    "학년", "학점", "수업방법", "시간,강의실")
     )
 
 
@@ -82,14 +107,15 @@ class RecommendActivity : AppCompatActivity() {
         // intent 전환
         val prev_intent = findViewById(R.id.button_prev) as ImageButton
         prev_intent.setOnClickListener {
-            val intent= Intent(this,SearchActivity::class.java)
+            val intent= Intent(this, SearchActivity::class.java)
             startActivity(intent)
         }
 
         val next_intent = findViewById(R.id.button_next) as ImageButton
         next_intent.setOnClickListener {
-            val intent= Intent(this,TimeTableActivity::class.java)
+            val intent= Intent(this, TimeTableActivity::class.java)
             startActivity(intent)
+            getLocalIpAddress()?.let { it1 -> Log.d("My Ip Address is ", it1) };
         }
 
 
@@ -143,7 +169,7 @@ class RecommendActivity : AppCompatActivity() {
         //레트로핏으로 가져올 url설정하고 세팅
         mRetrofit = Retrofit
             .Builder()
-            .baseUrl("http://192.168.0.7:5000/")
+            .baseUrl("http://192.168.0.11:5000/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
