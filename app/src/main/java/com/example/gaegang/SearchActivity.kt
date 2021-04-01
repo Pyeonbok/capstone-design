@@ -14,6 +14,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.example.gaegang.R.id
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class SearchActivity : AppCompatActivity() {
 
@@ -55,6 +57,11 @@ class SearchActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "음성 인식 결과가 없습니다.",
                     Toast.LENGTH_SHORT).show()
             } else {
+                val database : FirebaseDatabase = FirebaseDatabase.getInstance()
+                val myRef : DatabaseReference = database.getReference("sttText")
+                myRef.setValue(textView!!.text.toString())
+
+
                 intent.putExtra("textStt", textView!!.text)
                 startActivity(intent)
             }

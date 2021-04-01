@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gaegang.adapter.RecommendAdapter
 import com.example.gaegang.dataClass.RecommendedItem
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_recommend.*
 import retrofit2.Call
 import retrofit2.Response
@@ -18,6 +20,7 @@ import java.net.InetAddress
 import java.net.NetworkInterface
 import java.net.SocketException
 import java.util.*
+
 
 class RecommendActivity : AppCompatActivity() {
 
@@ -34,7 +37,10 @@ class RecommendActivity : AppCompatActivity() {
 * 수업방법
 * 시간,강의실
 */
-fun getLocalIpAddress(): String? {
+    private var firebaseDatabase: FirebaseDatabase? = FirebaseDatabase.getInstance()
+    private val databaseReference: DatabaseReference = firebaseDatabase!!.getReference()
+
+    fun getLocalIpAddress(): String? {
     try {
         val en: Enumeration<NetworkInterface> = NetworkInterface.getNetworkInterfaces()
         while (en.hasMoreElements()) {
@@ -53,36 +59,56 @@ fun getLocalIpAddress(): String? {
     return null
 }
     var recList = arrayListOf<RecommendedItem>(
-        RecommendedItem("강의명","교수명","학수번호",
-                "대학(원)","학과(부)","이수구분",
-                "학년", "학점","수업방법","시간,강의실"),
-        RecommendedItem("강의명","교수명","학수번호",
-            "대학(원)","학과(부)","이수구분",
-            "학년", "학점","수업방법","시간,강의실"),
-        RecommendedItem("강의명","교수명","학수번호",
-            "대학(원)","학과(부)","이수구분",
-            "학년", "학점","수업방법","시간,강의실"),
-        RecommendedItem("강의명","교수명","학수번호",
-            "대학(원)","학과(부)","이수구분",
-            "학년", "학점","수업방법","시간,강의실"),
-        RecommendedItem("강의명","교수명","학수번호",
-            "대학(원)","학과(부)","이수구분",
-            "학년", "학점","수업방법","시간,강의실"),
-        RecommendedItem("강의명","교수명","학수번호",
-            "대학(원)","학과(부)","이수구분",
-            "학년", "학점","수업방법","시간,강의실"),
-        RecommendedItem("강의명","교수명","학수번호",
-            "대학(원)","학과(부)","이수구분",
-            "학년", "학점","수업방법","시간,강의실"),
-        RecommendedItem("강의명","교수명","학수번호",
-            "대학(원)","학과(부)","이수구분",
-            "학년", "학점","수업방법","시간,강의실"),
-        RecommendedItem("강의명","교수명","학수번호",
-            "대학(원)","학과(부)","이수구분",
-            "학년", "학점","수업방법","시간,강의실"),
-        RecommendedItem("강의명","교수명","학수번호",
-            "대학(원)","학과(부)","이수구분",
-            "학년", "학점","수업방법","시간,강의실")
+        RecommendedItem(
+            "강의명", "교수명", "학수번호",
+            "대학(원)", "학과(부)", "이수구분",
+            "학년", "학점", "수업방법", "시간,강의실"
+        ),
+        RecommendedItem(
+            "강의명", "교수명", "학수번호",
+            "대학(원)", "학과(부)", "이수구분",
+            "학년", "학점", "수업방법", "시간,강의실"
+        ),
+        RecommendedItem(
+            "강의명", "교수명", "학수번호",
+            "대학(원)", "학과(부)", "이수구분",
+            "학년", "학점", "수업방법", "시간,강의실"
+        ),
+        RecommendedItem(
+            "강의명", "교수명", "학수번호",
+            "대학(원)", "학과(부)", "이수구분",
+            "학년", "학점", "수업방법", "시간,강의실"
+        ),
+        RecommendedItem(
+            "강의명", "교수명", "학수번호",
+            "대학(원)", "학과(부)", "이수구분",
+            "학년", "학점", "수업방법", "시간,강의실"
+        ),
+        RecommendedItem(
+            "강의명", "교수명", "학수번호",
+            "대학(원)", "학과(부)", "이수구분",
+            "학년", "학점", "수업방법", "시간,강의실"
+        ),
+        RecommendedItem(
+            "강의명", "교수명", "학수번호",
+            "대학(원)", "학과(부)", "이수구분",
+            "학년", "학점", "수업방법", "시간,강의실"
+        ),
+        RecommendedItem(
+            "강의명", "교수명", "학수번호",
+            "대학(원)", "학과(부)", "이수구분",
+            "학년", "학점", "수업방법", "시간,강의실"
+        ),
+        RecommendedItem(
+            "강의명", "교수명", "학수번호",
+            "대학(원)", "학과(부)", "이수구분",
+            "학년", "학점", "수업방법", "시간,강의실"
+        ),
+        RecommendedItem(
+            "강의명", "교수명", "학수번호",
+            "대학(원)", "학과(부)", "이수구분",
+            "학년", "학점", "수업방법", "시간,강의실"
+        )
     )
 
 
@@ -102,13 +128,13 @@ fun getLocalIpAddress(): String? {
         // intent 전환
         val prev_intent = findViewById(R.id.button_prev) as ImageButton
         prev_intent.setOnClickListener {
-            val intent= Intent(this,SearchActivity::class.java)
+            val intent= Intent(this, SearchActivity::class.java)
             startActivity(intent)
         }
 
         val next_intent = findViewById(R.id.button_next) as ImageButton
         next_intent.setOnClickListener {
-            val intent= Intent(this,TimeTableActivity::class.java)
+            val intent= Intent(this, TimeTableActivity::class.java)
             startActivity(intent)
         }
 
@@ -168,7 +194,7 @@ fun getLocalIpAddress(): String? {
         //레트로핏으로 가져올 url설정하고 세팅
         mRetrofit = Retrofit
             .Builder()
-            .baseUrl("http://${getLocalIpAddress().toString()}:5000/")
+            .baseUrl("http://192.168.0.19:5000/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
