@@ -3,13 +3,12 @@ package com.example.gaegang
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.*
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gaegang.adapter.RecommendAdapter
 import com.example.gaegang.dataClass.RecommendedItem
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_recommend.*
 import retrofit2.Call
 import retrofit2.Response
@@ -39,6 +38,8 @@ class RecommendActivity : AppCompatActivity() {
 */
     private var firebaseDatabase: FirebaseDatabase? = FirebaseDatabase.getInstance()
     private val databaseReference: DatabaseReference = firebaseDatabase!!.getReference()
+    var mRootDatabaseReference = FirebaseDatabase.getInstance().reference
+
 
     fun getLocalIpAddress(): String? {
     try {
@@ -58,60 +59,64 @@ class RecommendActivity : AppCompatActivity() {
     }
     return null
 }
+
+/*
     var recList = arrayListOf<RecommendedItem>(
-        RecommendedItem(
-            "강의명", "교수명", "학수번호",
-            "대학(원)", "학과(부)", "이수구분",
-            "학년", "학점", "수업방법", "시간,강의실"
-        ),
-        RecommendedItem(
-            "강의명", "교수명", "학수번호",
-            "대학(원)", "학과(부)", "이수구분",
-            "학년", "학점", "수업방법", "시간,강의실"
-        ),
-        RecommendedItem(
-            "강의명", "교수명", "학수번호",
-            "대학(원)", "학과(부)", "이수구분",
-            "학년", "학점", "수업방법", "시간,강의실"
-        ),
-        RecommendedItem(
-            "강의명", "교수명", "학수번호",
-            "대학(원)", "학과(부)", "이수구분",
-            "학년", "학점", "수업방법", "시간,강의실"
-        ),
-        RecommendedItem(
-            "강의명", "교수명", "학수번호",
-            "대학(원)", "학과(부)", "이수구분",
-            "학년", "학점", "수업방법", "시간,강의실"
-        ),
-        RecommendedItem(
-            "강의명", "교수명", "학수번호",
-            "대학(원)", "학과(부)", "이수구분",
-            "학년", "학점", "수업방법", "시간,강의실"
-        ),
-        RecommendedItem(
-            "강의명", "교수명", "학수번호",
-            "대학(원)", "학과(부)", "이수구분",
-            "학년", "학점", "수업방법", "시간,강의실"
-        ),
-        RecommendedItem(
-            "강의명", "교수명", "학수번호",
-            "대학(원)", "학과(부)", "이수구분",
-            "학년", "학점", "수업방법", "시간,강의실"
-        ),
-        RecommendedItem(
-            "강의명", "교수명", "학수번호",
-            "대학(원)", "학과(부)", "이수구분",
-            "학년", "학점", "수업방법", "시간,강의실"
-        ),
-        RecommendedItem(
-            "강의명", "교수명", "학수번호",
-            "대학(원)", "학과(부)", "이수구분",
-            "학년", "학점", "수업방법", "시간,강의실"
-        )
+
+
+            RecommendedItem(
+                    "강의명", "교수명", "학수번호",
+                    "대학(원)", "학과(부)", "이수구분",
+                    "학년", "학점", "수업방법", "시간,강의실"
+            ),
+            RecommendedItem(
+                    "강의명", "교수명", "학수번호",
+                    "대학(원)", "학과(부)", "이수구분",
+                    "학년", "학점", "수업방법", "시간,강의실"
+            ),
+            RecommendedItem(
+                    "강의명", "교수명", "학수번호",
+                    "대학(원)", "학과(부)", "이수구분",
+                    "학년", "학점", "수업방법", "시간,강의실"
+            ),
+            RecommendedItem(
+                    "강의명", "교수명", "학수번호",
+                    "대학(원)", "학과(부)", "이수구분",
+                    "학년", "학점", "수업방법", "시간,강의실"
+            ),
+            RecommendedItem(
+                    "강의명", "교수명", "학수번호",
+                    "대학(원)", "학과(부)", "이수구분",
+                    "학년", "학점", "수업방법", "시간,강의실"
+            ),
+            RecommendedItem(
+                    "강의명", "교수명", "학수번호",
+                    "대학(원)", "학과(부)", "이수구분",
+                    "학년", "학점", "수업방법", "시간,강의실"
+            ),
+            RecommendedItem(
+                    "강의명", "교수명", "학수번호",
+                    "대학(원)", "학과(부)", "이수구분",
+                    "학년", "학점", "수업방법", "시간,강의실"
+            ),
+            RecommendedItem(
+                    "강의명", "교수명", "학수번호",
+                    "대학(원)", "학과(부)", "이수구분",
+                    "학년", "학점", "수업방법", "시간,강의실"
+            ),
+            RecommendedItem(
+                    "강의명", "교수명", "학수번호",
+                    "대학(원)", "학과(부)", "이수구분",
+                    "학년", "학점", "수업방법", "시간,강의실"
+            ),
+            RecommendedItem(
+                    "강의명", "교수명", "학수번호",
+                    "대학(원)", "학과(부)", "이수구분",
+                    "학년", "학점", "수업방법", "시간,강의실"
+            )
     )
 
-
+*/
     val TAG = "TAG_RecommencdActivity"
 
     lateinit var mRetrofit: Retrofit
@@ -120,28 +125,68 @@ class RecommendActivity : AppCompatActivity() {
 
     var stt_text = ""
 
+    val recList:ArrayList<RecommendedItem> = arrayListOf<RecommendedItem>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recommend)
+
+        val database : FirebaseDatabase = FirebaseDatabase.getInstance()
+        val myclass : DatabaseReference = database.getReference("Recommendedclass")
+
+
+
+        var temp = arrayListOf<String>()
+        //Read from the database
+        val postListener = object : ValueEventListener {
+            var str= ""
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Get Post object and use the values to update the UI
+
+                val value = dataSnapshot?.value
+                textView.text = "$value"
+                Log.d(TAG, "Value is: " + value.toString());
+                str = value.toString() // 왜 안될까? 여기서부터.. 왜왜왜왜왜왜왜왜
+
+                print(str)
+            }
+
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
+            }
+
+
+        }
+
+        myclass.addValueEventListener(postListener)
+
+
+
+
+
+
 
 
         // intent 전환
         val prev_intent = findViewById(R.id.button_prev) as ImageButton
         prev_intent.setOnClickListener {
-            val intent= Intent(this, SearchActivity::class.java)
+            val intent = Intent(this, SearchActivity::class.java)
             startActivity(intent)
         }
 
         val next_intent = findViewById(R.id.button_next) as ImageButton
         next_intent.setOnClickListener {
-            val intent= Intent(this, TimeTableActivity::class.java)
+            val intent = Intent(this, TimeTableActivity::class.java)
             startActivity(intent)
+
+
         }
 
 
         // textView (stt) 값 전달받기
         val getintent = getIntent()
-        if (getintent.hasExtra("textStt")){
+        if (getintent.hasExtra("textStt")) {
             text_stt2.text = getintent.getStringExtra("textStt")
             stt_text = getintent.getStringExtra("textStt").toString()
         } else {
@@ -158,7 +203,12 @@ class RecommendActivity : AppCompatActivity() {
 
         setRetrofit()
         callTodoList()
+
+
     }
+
+
+
 
     // 리스트를 불러온다.
     private fun callTodoList() {
