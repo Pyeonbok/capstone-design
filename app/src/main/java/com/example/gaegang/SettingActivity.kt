@@ -32,7 +32,7 @@ class SettingActivity : AppCompatActivity() {
         val items_major_saengmyeong = resources.getStringArray(R.array.arr_saengmyeong)
         val items_major_dongbuga = resources.getStringArray(R.array.arr_dongbuga)
         val items_major_beob = resources.getStringArray(R.array.arr_beob)
-
+        var recommended_major=""
 
         val uniAdapter = object : ArrayAdapter<String>(this, R.layout.simple_spinner_dropdown_item) {
             override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
@@ -87,15 +87,17 @@ class SettingActivity : AppCompatActivity() {
                         major_spinner2.onItemSelectedListener=object:AdapterView.OnItemSelectedListener {
                             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                                 when (position) {
-                                    0 -> {
+                                    0 -> {recommended_major=items_major_inmun[0]
                                     }
-                                    1 -> {
+                                    1 -> {recommended_major=items_major_inmun[1]
                                     }
-                                    2 -> {
+                                    2 -> {recommended_major=items_major_inmun[2]
                                     }
-                                    3 -> {
+                                    3 -> {recommended_major=items_major_inmun[3]
                                     }
-                                    4 -> {
+                                    4 -> {recommended_major=items_major_inmun[4]
+                                    }
+                                    5 -> {recommended_major=items_major_inmun[5]
                                     }
                                 }
                             }
@@ -113,15 +115,15 @@ class SettingActivity : AppCompatActivity() {
                         major_spinner2.onItemSelectedListener=object:AdapterView.OnItemSelectedListener {
                             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                                 when (position) {
-                                    0 -> {
+                                    0 -> {recommended_major=items_major_jayeon[0]
                                     }
-                                    1 -> {
+                                    1 -> {recommended_major=items_major_jayeon[1]
                                     }
-                                    2 -> {
+                                    2 -> {recommended_major=items_major_jayeon[2]
                                     }
-                                    3 -> {
+                                    3 -> {recommended_major=items_major_jayeon[3]
                                     }
-                                    4 -> {
+                                    4 -> {recommended_major=items_major_jayeon[4]
                                     }
                                 }
                             }
@@ -139,13 +141,13 @@ class SettingActivity : AppCompatActivity() {
                         major_spinner2.onItemSelectedListener=object:AdapterView.OnItemSelectedListener {
                             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                                 when (position) {
-                                    0 -> {
+                                    0 -> {recommended_major=items_major_sahoe[0]
                                     }
-                                    1 -> {
+                                    1 -> {recommended_major=items_major_sahoe[1]
                                     }
-                                    2 -> {
+                                    2 -> {recommended_major=items_major_sahoe[2]
                                     }
-                                    3 -> {
+                                    3 -> {recommended_major=items_major_sahoe[3]
                                     }
                                 }
                             }
@@ -163,15 +165,15 @@ class SettingActivity : AppCompatActivity() {
                         major_spinner2.onItemSelectedListener=object:AdapterView.OnItemSelectedListener {
                             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                                 when (position) {
-                                    0 -> {
+                                    0 -> {recommended_major=items_major_global[0]
                                     }
-                                    1 -> {
+                                    1 -> {recommended_major=items_major_global[1]
                                     }
-                                    2 -> {
+                                    2 -> {recommended_major=items_major_global[2]
                                     }
-                                    3 -> {
+                                    3 -> {recommended_major=items_major_global[3]
                                     }
-                                    4 -> {
+                                    4 -> {recommended_major=items_major_global[4]
                                     }
                                 }
                             }
@@ -189,21 +191,21 @@ class SettingActivity : AppCompatActivity() {
                         major_spinner2.onItemSelectedListener=object:AdapterView.OnItemSelectedListener {
                             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                                 when (position) {
-                                    0 -> {
+                                    0 -> {recommended_major=items_major_gong[0]
                                     }
-                                    1 -> {
+                                    1 -> {recommended_major=items_major_gong[1]
                                     }
-                                    2 -> {
+                                    2 -> {recommended_major=items_major_gong[2]
                                     }
-                                    3 -> {
+                                    3 -> {recommended_major=items_major_gong[3]
                                     }
-                                    4 -> {
+                                    4 -> {recommended_major=items_major_gong[4]
                                     }
-                                    5 -> {
+                                    5 -> {recommended_major=items_major_gong[5]
                                     }
-                                    6 -> {
+                                    6 -> {recommended_major=items_major_gong[6]
                                     }
-                                    7 -> {
+                                    7 -> {recommended_major=items_major_gong[7]
                                     }
                                 }
                             }
@@ -221,11 +223,11 @@ class SettingActivity : AppCompatActivity() {
                         major_spinner2.onItemSelectedListener=object:AdapterView.OnItemSelectedListener {
                             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                                 when (position) {
-                                    0 -> {
+                                    0 -> {recommended_major=items_major_jeongbo[0]
                                     }
-                                    1 -> {
+                                    1 -> {recommended_major=items_major_jeongbo[1]
                                     }
-                                    2 -> {
+                                    2 -> {recommended_major=items_major_jeongbo[2]
                                     }
                                 }
                             }
@@ -243,11 +245,11 @@ class SettingActivity : AppCompatActivity() {
                         major_spinner2.onItemSelectedListener=object:AdapterView.OnItemSelectedListener {
                             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                                 when (position) {
-                                    0 -> {
+                                    0 -> {recommended_major=items_major_gyeongyeong[0]
                                     }
-                                    1 -> {
+                                    1 -> {recommended_major=items_major_gyeongyeong[1]
                                     }
-                                    2 -> {
+                                    2 -> {recommended_major=items_major_gyeongyeong[2]
                                     }
                                 }
                             }
@@ -265,18 +267,21 @@ class SettingActivity : AppCompatActivity() {
                         major_spinner2.onItemSelectedListener=object:AdapterView.OnItemSelectedListener {
                             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                                 when (position) {
-                                    0 -> {
+                                    0 -> {recommended_major=items_major_yesul[0]
                                     }
-                                    1 -> {
+                                    1 -> {recommended_major=items_major_yesul[1]
                                     }
-                                    2 -> {
+                                    2 -> {recommended_major=items_major_yesul[2]
                                     }
-                                    3 -> {
+                                    3 -> {recommended_major=items_major_yesul[3]
                                     }
-                                    4 -> {
+                                    4 -> {recommended_major=items_major_yesul[4]
                                     }
-                                    5 -> {
+                                    5 -> {recommended_major=items_major_yesul[5]
                                     }
+                                    6 -> {recommended_major=items_major_yesul[6]
+                                    }
+
                                 }
                             }
                             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -293,21 +298,21 @@ class SettingActivity : AppCompatActivity() {
                         major_spinner2.onItemSelectedListener=object:AdapterView.OnItemSelectedListener {
                             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                                 when (position) {
-                                    0 -> {
+                                    0 -> {recommended_major=items_major_sabeom[0]
                                     }
-                                    1 -> {
+                                    1 -> {recommended_major=items_major_sabeom[1]
                                     }
-                                    2 -> {
+                                    2 -> {recommended_major=items_major_sabeom[2]
                                     }
-                                    3 -> {
+                                    3 -> {recommended_major=items_major_sabeom[3]
                                     }
-                                    4 -> {
+                                    4 -> {recommended_major=items_major_sabeom[4]
                                     }
-                                    5 -> {
+                                    5 -> {recommended_major=items_major_sabeom[5]
                                     }
-                                    6 -> {
+                                    6 -> {recommended_major=items_major_sabeom[6]
                                     }
-                                    7 ->{
+                                    7 ->{recommended_major=items_major_sabeom[7]
                                     }
                                 }
                             }
@@ -325,19 +330,19 @@ class SettingActivity : AppCompatActivity() {
                         major_spinner2.onItemSelectedListener=object:AdapterView.OnItemSelectedListener {
                             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                                 when (position) {
-                                    0 -> {
+                                    0 -> {recommended_major=items_major_dosi[0]
                                     }
-                                    1 -> {
+                                    1 -> {recommended_major=items_major_dosi[1]
                                     }
-                                    2 -> {
+                                    2 -> {recommended_major=items_major_dosi[2]
                                     }
-                                    3 -> {
+                                    3 -> {recommended_major=items_major_dosi[3]
                                     }
-                                    4 -> {
+                                    4 -> {recommended_major=items_major_dosi[4]
                                     }
-                                    5 -> {
+                                    5 -> {recommended_major=items_major_dosi[5]
                                     }
-                                    6 -> {
+                                    6 -> {recommended_major=items_major_dosi[6]
                                     }
                                 }
                             }
@@ -355,13 +360,13 @@ class SettingActivity : AppCompatActivity() {
                         major_spinner2.onItemSelectedListener=object:AdapterView.OnItemSelectedListener {
                             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                                 when (position) {
-                                    0 -> {
+                                    0 -> {recommended_major=items_major_saengmyeong[0]
                                     }
-                                    1 -> {
+                                    1 -> {recommended_major=items_major_saengmyeong[1]
                                     }
-                                    2 -> {
+                                    2 -> {recommended_major=items_major_saengmyeong[2]
                                     }
-                                    3 -> {
+                                    3 -> {recommended_major=items_major_saengmyeong[3]
                                     }
                                 }
                             }
@@ -379,9 +384,17 @@ class SettingActivity : AppCompatActivity() {
                         major_spinner2.onItemSelectedListener=object:AdapterView.OnItemSelectedListener {
                             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                                 when (position) {
-                                    0 -> {
+                                    0 -> {recommended_major=items_major_dongbuga[0]
                                     }
-                                    1 -> {
+                                    1 -> {recommended_major=items_major_dongbuga[1]
+                                    }
+                                    2 -> {recommended_major=items_major_dongbuga[2]
+                                    }
+                                    3 -> {recommended_major=items_major_dongbuga[3]
+                                    }
+                                    4 -> {recommended_major=items_major_dongbuga[4]
+                                    }
+                                    5 -> {recommended_major=items_major_dongbuga[5]
                                     }
                                 }
                             }
@@ -419,6 +432,7 @@ class SettingActivity : AppCompatActivity() {
         next_intent.setOnClickListener {
             val intent= Intent(this,SearchActivity::class.java)
             startActivity(intent)
+            Log.d("선택된학과",recommended_major)
         }
 
     }

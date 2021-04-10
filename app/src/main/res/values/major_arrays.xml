@@ -69,6 +69,7 @@
         <item>한국화전공</item>
         <item>서양회전공</item>
         <item>디자인학부</item>
+        <item>조형예술학과</item>
         <item>공연예술학과</item>
         <item>체육학부</item>
         <item>운동건강학부</item>
@@ -85,22 +86,25 @@
     </string-array>
     <string-array name="arr_dosi">
         <item>도시행정학과</item>
-        <item>환경공학전공</item>
+        <item>건설환경공학</item>
         <item>환경공학</item>
         <item>도시공학과</item>
-        <item>건축학</item>
         <item>건축공학</item>
-        <item>도시설계</item>
+        <item>도시건축학부</item>
     </string-array>
     <string-array name="arr_saengmyeong">
-        <item>생명과학</item>
+        <item>생명과학부</item>
         <item>분자의생명</item>
-        <item>생명공학</item>
+        <item>생명공학부</item>
         <item>나노바이오</item>
     </string-array>
     <string-array name="arr_dongbuga">
-        <item>동북아통상전공</item>
+        <item>동북아국제통상학부</item>
         <item>한국통상전공</item>
+        <item>중국통상전공</item>
+        <item>일본통상전공</item>
+        <item>러시아통상전공</item>
+        <item>미국통상전공</item>
     </string-array>
     <string-array name="arr_beob">
         <item>법학부</item>
