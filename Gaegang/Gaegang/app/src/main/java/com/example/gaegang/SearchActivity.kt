@@ -14,6 +14,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.example.gaegang.R.id
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import kotlin.concurrent.timer
 
 class SearchActivity : AppCompatActivity() {
 
@@ -51,13 +54,31 @@ class SearchActivity : AppCompatActivity() {
         val next_intent = findViewById(id.button_next) as ImageButton
         next_intent.setOnClickListener {
             val intent = Intent(this, RecommendActivity::class.java)
+            val customLoading = LoadingActivity(this)
             if (textView!!.text == "※ 이 곳에 음성 인식 결과가 나타납니다.") {
                 Toast.makeText(applicationContext, "음성 인식 결과가 없습니다.",
                     Toast.LENGTH_SHORT).show()
             } else {
+                val database : FirebaseDatabase = FirebaseDatabase.getInstance()
+                val myRef : DatabaseReference = database.getReference("sttText")
+                myRef.setValue(textView!!.text.toString())
+
+                customLoading.show()
+
+                var second : Int = 0
+                timer(period = 2000, initialDelay=2000){
+                    second++
+                    print(second)
+                    if (second==2){
+                        cancel();
+                        startActivity(intent)
+                    }
+                }
+
                 intent.putExtra("textStt", textView!!.text)
-                startActivity(intent)
             }
+
+
         }
 
         /*
@@ -76,6 +97,7 @@ class SearchActivity : AppCompatActivity() {
             val intent2= Intent(this,SettingActivity::class.java)
             startActivity(intent2)
         }
+
     }
 
     private val listener: RecognitionListener = object : RecognitionListener {
