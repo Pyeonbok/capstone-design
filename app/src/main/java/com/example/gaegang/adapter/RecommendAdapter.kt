@@ -12,7 +12,6 @@ import com.example.gaegang.dataClass.RecommendedItem
 class RecommendAdapter(val context: Context, val recList: ArrayList<RecommendedItem>) :
 RecyclerView.Adapter<RecommendAdapter.Holder>() {
 
-
     /*
     * 강의명
     * 교수명
@@ -63,4 +62,5 @@ RecyclerView.Adapter<RecommendAdapter.Holder>() {
     override fun getItemCount(): Int {
         return recList.size
     }
+
 }

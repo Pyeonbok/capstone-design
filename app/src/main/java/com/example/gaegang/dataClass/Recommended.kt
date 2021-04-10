@@ -1,7 +1,6 @@
 package com.example.gaegang.dataClass
 
 
-
 class Recommended : ArrayList<RecommendedItem>()
 
 /*
@@ -16,14 +15,16 @@ class Recommended : ArrayList<RecommendedItem>()
 * 수업방법
 * 시간,강의실
 */
-data class RecommendedItem (
-    val lecture:String,
-    val professor:String,
-    val number:String,
-    val uni:String,
-    val major:String,
-    val classification:String,
-    val grade:String,
-    val credit:String,
-    val teaching_method:String,
-    val time:String){}
+
+data class RecommendedItem(
+    val lecture: String?,
+    val professor: String?,
+    val number: String?,
+    val uni: String?,
+    val major: String?,
+    val classification: String?,
+    val grade: String?,
+    val credit: String?,
+    val teaching_method: String?,
+    val time: String?
+)
