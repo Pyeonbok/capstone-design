@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">논문 리더기</string>
+
+    <string name="title01">청각장애인의 기본권 보장에 관한 연구</string>
+    <string name="title02">코로나19로 인한 온라인 개학 </string>
+    <string name="title03">IB 교육과정 시스템의 특징과 교육과정적 의의 탐구</string>
+    <string name="title04">비대면 온라인 실습수업을 통한 효율적인 디자인 교육 프로그램 연구</string>
+    <string name="title05">적분의 기본개념과 실생활의 응용</string>
+    <string name="title06">언택트 방식을 통한 음악산업의 새로운 패러다임</string>
+
+    <string name="author01">전지수</string>
+    <string name="author02">정혜욱</string>
+    <string name="author03">이지현</string>
+    <string name="author04">박성영</string>
+    <string name="author05">김미선</string>
+    <string name="author06">윤창원</string>
+
+    <string name="year01">2016</string>
+    <string name="year02">2020</string>
+    <string name="year03">2019</string>
+    <string name="year04">2020</string>
+    <string name="year05">2013</string>
+    <string name="year06">2020</string>
+
+    <string name="source01">한국외국어대학교 대학원</string>
+    <string name="source02">서강대학교 교육대학원</string>
+    <string name="source03">경북대학교 대학원</string>
+    <string name="source04">부경대학교 대학원</string>
+    <string name="source05">영남대학교 교육대학원</string>
+    <string name="source06">상명대학교 일반대학원</string>
+
+</resources>
