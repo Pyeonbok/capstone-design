@@ -138,16 +138,45 @@ class RecommendActivity : AppCompatActivity() {
         var temp = arrayListOf<String>()
         //Read from the database
         val postListener = object : ValueEventListener {
-            var str= ""
+            var Lecture= ""
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // Get Post object and use the values to update the UI
 
                 val value = dataSnapshot?.value
-                textView.text = "$value"
+                //textView.text = "$value"
                 Log.d(TAG, "Value is: " + value.toString());
-                str = value.toString() // 왜 안될까? 여기서부터.. 왜왜왜왜왜왜왜왜
+                
+                Lecture = value.toString()//강의 스트링으로 받기
+                var arr = Lecture.split("], [")
+                var recommendedClasses = Array(10, {item -> ""})
+                //스트링 형태 분리
+                for(i in 0 until arr.size){
+                    if(i==0) {
+                        val str1 = arr[i].replace("[[","")
+//                    Log.w(TAG, ">>"+ i + " " + str1)
+                        recommendedClasses[i]=str1
+                    }
+                    else if(i==9){
+                        val str2 = arr[i].replace("]]","")
+//                    Log.w(TAG, ">>"+ i + " " + str2)
+                        recommendedClasses[i]=str2
+                    }
+                    else {
+                        val str3=arr[i]
+//                    Log.w(TAG, ">>"+ i + " " + arr[i])
+                        recommendedClasses[i]=str3
+                    }
 
-                print(str)
+                }
+                //데이터 갯수만큼 반복,recList에추가
+                for(i in 0 until recommendedClasses.size){
+                    var classArray = recommendedClasses[i].split(", ")
+
+                    recList.add(RecommendedItem(classArray[0], classArray[1], classArray[2], classArray[3], classArray[4],
+                            classArray[5], classArray[6], classArray[7], classArray[8], classArray[9]))
+                }
+
+
             }
 
 
@@ -158,12 +187,7 @@ class RecommendActivity : AppCompatActivity() {
 
 
         }
-
         myclass.addValueEventListener(postListener)
-
-
-
-
 
 
 
@@ -179,6 +203,7 @@ class RecommendActivity : AppCompatActivity() {
         next_intent.setOnClickListener {
             val intent = Intent(this, TimeTableActivity::class.java)
             startActivity(intent)
+
 
 
         }
