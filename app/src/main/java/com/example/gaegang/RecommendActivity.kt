@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gaegang.adapter.RecommendAdapter
 import com.example.gaegang.dataClass.RecommendedItem
-import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_recommend.*
 import retrofit2.Call
 import retrofit2.Response
@@ -19,15 +18,20 @@ import java.net.InetAddress
 import java.net.NetworkInterface
 import java.net.SocketException
 import java.util.*
-import kotlin.concurrent.timer
+import kotlin.collections.ArrayList
 
 
-class RecommendActivity : AppCompatActivity() {
+class RecommendActivity : AppCompatActivity()  {
 
-    private var firebaseDatabase: FirebaseDatabase? = FirebaseDatabase.getInstance()
-    private val databaseReference: DatabaseReference = firebaseDatabase!!.getReference()
-    var mRootDatabaseReference = FirebaseDatabase.getInstance().reference
 
+    val TAG = "TAG_RecommencdActivity"
+
+    lateinit var mRetrofit: Retrofit
+    lateinit var mRetrofitAPI: RetrofitAPI
+    lateinit var mCallTodoList: retrofit2.Call<RecommendedItem>
+
+    var stt_text = ""
+    lateinit var recList : ArrayList<RecommendedItem>
 
     fun getLocalIpAddress(): String? {
         try {
@@ -48,79 +52,10 @@ class RecommendActivity : AppCompatActivity() {
         return null
     }
 
-    val TAG = "TAG_RecommencdActivity"
 
-    lateinit var mRetrofit: Retrofit
-    lateinit var mRetrofitAPI: RetrofitAPI
-    lateinit var mCallTodoList: retrofit2.Call<RecommendedItem>
-
-    var stt_text = ""
-
-    val recList:ArrayList<RecommendedItem> = arrayListOf<RecommendedItem>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recommend)
-
-        val database : FirebaseDatabase = FirebaseDatabase.getInstance()
-        val myclass : DatabaseReference = database.getReference("Recommendedclass")
-
-
-
-        var temp = arrayListOf<String>()
-        //Read from the database
-        val postListener = object : ValueEventListener {
-            var Lecture= ""
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // Get Post object and use the values to update the UI
-
-                val value = dataSnapshot?.value
-                //textView.text = "$value"
-                Log.d(TAG, "Value is: " + value.toString());
-
-                Lecture = value.toString()//강의 스트링으로 받기
-                var arr = Lecture.split("], [")
-                var recommendedClasses = Array(10, {item -> ""})
-                //스트링 형태 분리
-                for(i in 0 until arr.size){
-                    if(i==0) {
-                        val str1 = arr[i].replace("[[","")
-//                    Log.w(TAG, ">>"+ i + " " + str1)
-                        recommendedClasses[i]=str1
-                    }
-                    else if(i==9){
-                        val str2 = arr[i].replace("]]","")
-//                    Log.w(TAG, ">>"+ i + " " + str2)
-                        recommendedClasses[i]=str2
-                    }
-                    else {
-                        val str3=arr[i]
-//                    Log.w(TAG, ">>"+ i + " " + arr[i])
-                        recommendedClasses[i]=str3
-                    }
-
-                }
-                //데이터 갯수만큼 반복,recList에추가
-                for(i in 0 until recommendedClasses.size){
-                    var classArray = recommendedClasses[i].split(", ")
-
-                    recList.add(RecommendedItem(classArray[0], classArray[1], classArray[2], classArray[3], classArray[4],
-                            classArray[5], classArray[6], classArray[7], classArray[8], classArray[9]))
-                }
-
-
-            }
-
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                // Getting Post failed, log a message
-                Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
-            }
-
-
-        }
-        myclass.addValueEventListener(postListener)
-
-
 
 
         // intent 전환
@@ -137,17 +72,20 @@ class RecommendActivity : AppCompatActivity() {
         }
 
 
+
         // textView (stt) 값 전달받기
         val getintent = getIntent()
         if (getintent.hasExtra("textStt")) {
             text_stt2.text = getintent.getStringExtra("textStt")
             stt_text = getintent.getStringExtra("textStt").toString()
+            recList = getintent.getSerializableExtra("recList") as ArrayList<RecommendedItem>
         } else {
+            Log.d(TAG,"stt text 안받아옴")
         }
 
 
         // recyclerview
-        val mAdapter = RecommendAdapter(this, recList)
+        val mAdapter = RecommendAdapter(this, recList as ArrayList<RecommendedItem>)
         recyclerview_rec.adapter = mAdapter
 
         val lm = LinearLayoutManager(this)
@@ -156,9 +94,8 @@ class RecommendActivity : AppCompatActivity() {
 
         setRetrofit()
         callTodoList()
-
-
     }
+
 
     // 리스트를 불러온다.
     private fun callTodoList() {

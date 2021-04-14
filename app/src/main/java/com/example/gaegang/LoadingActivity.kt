@@ -11,7 +11,6 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_loading.*
 
 class LoadingActivity(context: Context) : Dialog(context) {
     private var c: Context? = null

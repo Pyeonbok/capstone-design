@@ -1,7 +1,9 @@
 package com.example.gaegang.dataClass
 
+import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
-class Recommended : ArrayList<RecommendedItem>()
+// class Recommended : ArrayList<RecommendedItem>()
 
 /*
 * 강의명
@@ -27,4 +29,4 @@ data class RecommendedItem(
     val credit: String?,
     val teaching_method: String?,
     val time: String?
-)
+) :Serializable{}

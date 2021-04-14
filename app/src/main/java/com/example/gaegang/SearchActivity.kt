@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
+import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
@@ -14,16 +15,25 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.example.gaegang.R.id
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.example.gaegang.dataClass.RecommendedItem
+import com.google.firebase.database.*
+import java.util.ArrayList
 import kotlin.concurrent.timer
 
 class SearchActivity : AppCompatActivity() {
+
+    val TAG = "TAG_SearchActivity"
 
     var mRecognizer: SpeechRecognizer? = null
     var sttBtn: ImageButton? = null
     var textView: TextView? = null
     val PERMISSION = 1
+
+    val recList: ArrayList<RecommendedItem> = arrayListOf<RecommendedItem>()
+    private var firebaseDatabase: FirebaseDatabase? = FirebaseDatabase.getInstance()
+    private val databaseReference: DatabaseReference = firebaseDatabase!!.getReference()
+    var mRootDatabaseReference = FirebaseDatabase.getInstance().reference
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +58,59 @@ class SearchActivity : AppCompatActivity() {
                 startListening(intent)
             }
         }
+
+
+        val database : FirebaseDatabase = FirebaseDatabase.getInstance()
+        val myclass : DatabaseReference = database.getReference("Recommendedclass")
+
+        var temp = arrayListOf<String>()
+        //Read from the database
+        val postListener = object : ValueEventListener {
+            var Lecture= ""
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Get Post object and use the values to update the UI
+
+                val value = dataSnapshot?.value
+                //textView.text = "$value"
+                Log.d(TAG, "Value is: " + value.toString());
+
+                Lecture = value.toString()//강의 스트링으로 받기
+                var arr = Lecture.split("], [")
+                var recommendedClasses = Array(10, {item -> ""})
+                //스트링 형태 분리
+                for(i in 0 until arr.size){
+                    if(i==0) {
+                        val str1 = arr[i].replace("[[","")
+//                    Log.w(TAG, ">>"+ i + " " + str1)
+                        recommendedClasses[i]=str1
+                    }
+                    else if(i==9){
+                        val str2 = arr[i].replace("]]","")
+//                    Log.w(TAG, ">>"+ i + " " + str2)
+                        recommendedClasses[i]=str2
+                    }
+                    else {
+                        val str3=arr[i]
+//                    Log.w(TAG, ">>"+ i + " " + arr[i])
+                        recommendedClasses[i]=str3
+                    }
+
+                }
+                //데이터 갯수만큼 반복,recList에추가
+                for(i in 0 until recommendedClasses.size){
+                    var classArray = recommendedClasses[i].split(", ")
+
+                    recList.add(RecommendedItem(classArray[0], classArray[1], classArray[2], classArray[3], classArray[4],
+                            classArray[5], classArray[6], classArray[7], classArray[8], classArray[9]))
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
+            }
+        }
+        myclass.addValueEventListener(postListener)
 
 
         // intent 전환
@@ -76,6 +139,7 @@ class SearchActivity : AppCompatActivity() {
                 }
 
                 intent.putExtra("textStt", textView!!.text)
+                intent.putExtra("recList",recList)
             }
 
 
