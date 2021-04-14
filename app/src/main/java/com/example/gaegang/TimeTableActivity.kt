@@ -1,5 +1,5 @@
 package com.example.gaegang
-
+/*
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
@@ -20,3 +20,4 @@ class TimeTableActivity : AppCompatActivity() {
 
     }
 }
+*/
