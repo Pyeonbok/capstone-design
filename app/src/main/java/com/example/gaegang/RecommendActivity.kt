@@ -85,7 +85,7 @@ class RecommendActivity : AppCompatActivity()  {
 
 
         // recyclerview
-        val mAdapter = RecommendAdapter(this, recList as ArrayList<RecommendedItem>)
+        val mAdapter = RecommendAdapter(this, recList)
         recyclerview_rec.adapter = mAdapter
 
         val lm = LinearLayoutManager(this)

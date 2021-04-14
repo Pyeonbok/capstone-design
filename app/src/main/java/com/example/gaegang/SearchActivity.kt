@@ -60,59 +60,6 @@ class SearchActivity : AppCompatActivity() {
         }
 
 
-        val database : FirebaseDatabase = FirebaseDatabase.getInstance()
-        val myclass : DatabaseReference = database.getReference("Recommendedclass")
-
-        var temp = arrayListOf<String>()
-        //Read from the database
-        val postListener = object : ValueEventListener {
-            var Lecture= ""
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // Get Post object and use the values to update the UI
-
-                val value = dataSnapshot?.value
-                //textView.text = "$value"
-                Log.d(TAG, "Value is: " + value.toString());
-
-                Lecture = value.toString()//강의 스트링으로 받기
-                var arr = Lecture.split("], [")
-                var recommendedClasses = Array(10, {item -> ""})
-                //스트링 형태 분리
-                for(i in 0 until arr.size){
-                    if(i==0) {
-                        val str1 = arr[i].replace("[[","")
-//                    Log.w(TAG, ">>"+ i + " " + str1)
-                        recommendedClasses[i]=str1
-                    }
-                    else if(i==9){
-                        val str2 = arr[i].replace("]]","")
-//                    Log.w(TAG, ">>"+ i + " " + str2)
-                        recommendedClasses[i]=str2
-                    }
-                    else {
-                        val str3=arr[i]
-//                    Log.w(TAG, ">>"+ i + " " + arr[i])
-                        recommendedClasses[i]=str3
-                    }
-
-                }
-                //데이터 갯수만큼 반복,recList에추가
-                for(i in 0 until recommendedClasses.size){
-                    var classArray = recommendedClasses[i].split(", ")
-
-                    recList.add(RecommendedItem(classArray[0], classArray[1], classArray[2], classArray[3], classArray[4],
-                            classArray[5], classArray[6], classArray[7], classArray[8], classArray[9]))
-                }
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                // Getting Post failed, log a message
-                Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
-            }
-        }
-        myclass.addValueEventListener(postListener)
-
-
         // intent 전환
         val next_intent = findViewById(id.button_next) as ImageButton
         next_intent.setOnClickListener {
@@ -125,15 +72,17 @@ class SearchActivity : AppCompatActivity() {
                 val database : FirebaseDatabase = FirebaseDatabase.getInstance()
                 val myRef : DatabaseReference = database.getReference("sttText")
                 myRef.setValue(textView!!.text.toString())
-
                 customLoading.show()
 
                 var second : Int = 0
                 timer(period = 2000, initialDelay=2000){
                     second++
                     print(second)
+                    if (second==1){
+                        getList()
+                    }
                     if (second==2){
-                        cancel();
+                        cancel()
                         startActivity(intent)
                     }
                 }
@@ -141,8 +90,6 @@ class SearchActivity : AppCompatActivity() {
                 intent.putExtra("textStt", textView!!.text)
                 intent.putExtra("recList",recList)
             }
-
-
         }
 
         /*
@@ -202,5 +149,58 @@ class SearchActivity : AppCompatActivity() {
 
         override fun onPartialResults(partialResults: Bundle) {}
         override fun onEvent(eventType: Int, params: Bundle) {}
+    }
+
+    fun getList() {
+        val database : FirebaseDatabase = FirebaseDatabase.getInstance()
+        val myclass : DatabaseReference = database.getReference("Recommendedclass")
+
+        //Read from the database
+        val postListener = object : ValueEventListener {
+            var Lecture= ""
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Get Post object and use the values to update the UI
+
+                val value = dataSnapshot?.value
+                //textView.text = "$value"
+                Log.d(TAG, "Value is: " + value.toString());
+
+                Lecture = value.toString()//강의 스트링으로 받기
+                var arr = Lecture.split("], [")
+                var recommendedClasses = Array(10, {item -> ""})
+                //스트링 형태 분리
+                for(i in 0 until arr.size){
+                    if(i==0) {
+                        val str1 = arr[i].replace("[[","")
+//                    Log.w(TAG, ">>"+ i + " " + str1)
+                        recommendedClasses[i]=str1
+                    }
+                    else if(i==9){
+                        val str2 = arr[i].replace("]]","")
+//                    Log.w(TAG, ">>"+ i + " " + str2)
+                        recommendedClasses[i]=str2
+                    }
+                    else {
+                        val str3=arr[i]
+//                    Log.w(TAG, ">>"+ i + " " + arr[i])
+                        recommendedClasses[i]=str3
+                    }
+
+                }
+                //데이터 갯수만큼 반복,recList에추가
+                for(i in 0 until recommendedClasses.size){
+                    var classArray = recommendedClasses[i].split(", ")
+
+                    recList.add(RecommendedItem(classArray[0], classArray[1], classArray[2], classArray[3], classArray[4],
+                        classArray[5], classArray[6], classArray[7], classArray[8], classArray[9]))
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
+            }
+        }
+        myclass.addValueEventListener(postListener)
     }
 }
