@@ -1,9 +1,6 @@
 package com.example.gaegang.dataClass
 
-import com.google.gson.annotations.SerializedName
 import java.io.Serializable
-
-// class Recommended : ArrayList<RecommendedItem>()
 
 /*
 * 강의명

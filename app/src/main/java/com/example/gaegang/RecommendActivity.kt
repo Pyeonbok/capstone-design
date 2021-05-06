@@ -26,10 +26,6 @@ class RecommendActivity : AppCompatActivity()  {
 
     val TAG = "TAG_RecommencdActivity"
 
-    lateinit var mRetrofit: Retrofit
-    lateinit var mRetrofitAPI: RetrofitAPI
-    lateinit var mCallTodoList: retrofit2.Call<RecommendedItem>
-
     var stt_text = ""
     lateinit var recList : ArrayList<RecommendedItem>
 
@@ -65,15 +61,6 @@ class RecommendActivity : AppCompatActivity()  {
             startActivity(intent)
         }
 
-        /*
-        val next_intent = findViewById(R.id.button_next) as ImageButton
-        next_intent.setOnClickListener {
-            val intent = Intent(this, TimeTableActivity::class.java)
-            startActivity(intent)
-        }
-        */
-
-
 
         // textView (stt) 값 전달받기
         val getintent = getIntent()
@@ -93,51 +80,13 @@ class RecommendActivity : AppCompatActivity()  {
         val lm = LinearLayoutManager(this)
         recyclerview_rec.layoutManager = lm
         recyclerview_rec.setHasFixedSize(true)
-
-        setRetrofit()
-        callTodoList()
     }
 
-
-    // 리스트를 불러온다.
-    private fun callTodoList() {
-        mCallTodoList = mRetrofitAPI.getTodoList(getSttString())
-        mCallTodoList.enqueue(mRetrofitCallback)
-    }
 
     // 음성 인식 결과 text
     private fun getSttString(): String {
         var result = stt_text
-        //  var result = findViewById<TextView>(R.id.text_non0)   // test
 
         return result
-        // return result.text.toString()
-    }
-
-    // http요청을 보냈고 이건 응답을 받을 콜벡메서드
-    private val mRetrofitCallback = (object : retrofit2.Callback<RecommendedItem> {
-        override fun onFailure(call: Call<RecommendedItem>, t: Throwable) {
-            t.printStackTrace()
-            Log.d(TAG, "에러입니다. => ${t.message.toString()}")
-
-        }
-
-        override fun onResponse(call: Call<RecommendedItem>, response: Response<RecommendedItem>) {
-            val result = response.body()
-            Log.d(TAG, "결과는 => $result")
-
-        }
-    })
-
-    private fun setRetrofit() {
-        //레트로핏으로 가져올 url설정하고 세팅
-        mRetrofit = Retrofit
-                .Builder()
-                .baseUrl("http://192.168.0.19:5000/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-
-        //인터페이스로 만든 레트로핏 api요청 받는 것 변수로 등록
-        mRetrofitAPI = mRetrofit.create(RetrofitAPI::class.java)
     }
 }

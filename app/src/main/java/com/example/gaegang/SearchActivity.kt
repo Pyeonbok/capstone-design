@@ -95,23 +95,11 @@ class SearchActivity : AppCompatActivity() {
             }
         }
 
-        /*
-        // test용 intent (음성인식 못할 때 ㅠ)
-        val next_intent = findViewById(id.button_next) as ImageButton
-        next_intent.setOnClickListener {
-            val intent = Intent(this, RecommendActivity::class.java)
-            intent.putExtra("textStt", textView!!.text)
-            startActivity(intent)
-
-        }
-*/
-
         val prev_intent = findViewById(id.button_prev) as ImageButton
         prev_intent.setOnClickListener {
             val intent2= Intent(this,SettingActivity::class.java)
             startActivity(intent2)
         }
-
     }
 
     private val listener: RecognitionListener = object : RecognitionListener {
