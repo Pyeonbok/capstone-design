@@ -68,13 +68,22 @@ class SearchActivity : AppCompatActivity() {
             if (textView!!.text == "※ 이 곳에 음성 인식 결과가 나타납니다.") {
                 Toast.makeText(applicationContext, "음성 인식 결과가 없습니다.",
                     Toast.LENGTH_SHORT).show()
+
+
             } else {
-                val database : FirebaseDatabase = FirebaseDatabase.getInstance()
-                val myRef : DatabaseReference = database.getReference("sttText")
+                var second : Int = 0
+                timer(period = 2000, initialDelay=2000){
+                    second++
+                    if (second==1){
+                        cancel()
+                    }
+                }
+
+                val myRef : DatabaseReference = firebaseDatabase!!.getReference("sttText")
                 myRef.setValue(textView!!.text.toString())
                 customLoading.show()
 
-                var second : Int = 0
+                second = 0
                 timer(period = 2000, initialDelay=2000){
                     second++
                     print(second)
@@ -152,8 +161,8 @@ class SearchActivity : AppCompatActivity() {
     }
 
     fun getList() {
-        val database : FirebaseDatabase = FirebaseDatabase.getInstance()
-        val myclass : DatabaseReference = database.getReference("Recommendedclass")
+//        val database : FirebaseDatabase = FirebaseDatabase.getInstance()
+        val myclass : DatabaseReference = firebaseDatabase!!.getReference("Recommendedclass")
 
         //Read from the database
         val postListener = object : ValueEventListener {
@@ -185,7 +194,7 @@ class SearchActivity : AppCompatActivity() {
 //                    Log.w(TAG, ">>"+ i + " " + arr[i])
                         recommendedClasses[i]=str3
                     }
-
+2
                 }
                 //데이터 갯수만큼 반복,recList에추가
                 for(i in 0 until recommendedClasses.size){

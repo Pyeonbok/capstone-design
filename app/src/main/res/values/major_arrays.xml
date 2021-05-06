@@ -67,7 +67,7 @@
     </string-array>
     <string-array name="arr_yesul">
         <item>한국화전공</item>
-        <item>서양회전공</item>
+        <item>서양화전공</item>
         <item>디자인학부</item>
         <item>조형예술학과</item>
         <item>공연예술학과</item>
@@ -89,7 +89,6 @@
         <item>건설환경공학</item>
         <item>환경공학</item>
         <item>도시공학과</item>
-        <item>건축공학</item>
         <item>도시건축학부</item>
     </string-array>
     <string-array name="arr_saengmyeong">

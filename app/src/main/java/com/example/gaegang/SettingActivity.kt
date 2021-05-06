@@ -9,6 +9,8 @@ import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.activity_setting.*
 
@@ -340,10 +342,7 @@ class SettingActivity : AppCompatActivity() {
                                     }
                                     4 -> {recommended_major=items_major_dosi[4]
                                     }
-                                    5 -> {recommended_major=items_major_dosi[5]
-                                    }
-                                    6 -> {recommended_major=items_major_dosi[6]
-                                    }
+
                                 }
                             }
                             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -433,6 +432,11 @@ class SettingActivity : AppCompatActivity() {
             val intent= Intent(this,SearchActivity::class.java)
             startActivity(intent)
             Log.d("선택된학과",recommended_major)
+
+            val database : FirebaseDatabase = FirebaseDatabase.getInstance()
+            val myRef : DatabaseReference = database.getReference("majorName")
+            myRef.setValue(recommended_major)
+
         }
 
     }
