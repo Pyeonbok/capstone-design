@@ -95,7 +95,7 @@ class SearchActivity : AppCompatActivity() {
                         startActivity(intent)
                     }
                 }
-
+                Log.d("RECLIST : ", recList.toString())
                 intent.putExtra("textStt", textView!!.text)
                 intent.putExtra("recList",recList)
             }
@@ -160,6 +160,7 @@ class SearchActivity : AppCompatActivity() {
         override fun onEvent(eventType: Int, params: Bundle) {}
     }
 
+
     fun getList() {
 //        val database : FirebaseDatabase = FirebaseDatabase.getInstance()
         val myclass : DatabaseReference = firebaseDatabase!!.getReference("Recommendedclass")
@@ -170,13 +171,13 @@ class SearchActivity : AppCompatActivity() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // Get Post object and use the values to update the UI
 
-                val value = dataSnapshot?.value
+                val value = dataSnapshot.value
                 //textView.text = "$value"
                 Log.d(TAG, "Value is: " + value.toString());
 
                 Lecture = value.toString()//강의 스트링으로 받기
-                var arr = Lecture.split("], [")
-                var recommendedClasses = Array(10, {item -> ""})
+                val arr = Lecture.split("], [")
+                val recommendedClasses = Array(10, { item -> ""})
                 //스트링 형태 분리
                 for(i in 0 until arr.size){
                     if(i==0) {
@@ -198,10 +199,11 @@ class SearchActivity : AppCompatActivity() {
                 }
                 //데이터 갯수만큼 반복,recList에추가
                 for(i in 0 until recommendedClasses.size){
-                    var classArray = recommendedClasses[i].split(", ")
-
-                    recList.add(RecommendedItem(classArray[0], classArray[1], classArray[2], classArray[3], classArray[4],
-                        classArray[5], classArray[6], classArray[7], classArray[8], classArray[9]))
+                    val classArray = recommendedClasses[i].split(", ")
+                    if (classArray.size > 9) {
+                        recList.add(RecommendedItem(classArray[0], classArray[1], classArray[2], classArray[3], classArray[4],
+                                classArray[5], classArray[6], classArray[7], classArray[8], classArray[9]))
+                    }
                 }
             }
 
