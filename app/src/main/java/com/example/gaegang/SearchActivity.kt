@@ -64,11 +64,11 @@ class SearchActivity : AppCompatActivity() {
         val next_intent = findViewById(id.button_next) as ImageButton
         next_intent.setOnClickListener {
             val intent = Intent(this, RecommendActivity::class.java)
+            val intent_this = Intent(this,SearchActivity::class.java)
             val customLoading = LoadingActivity(this)
             if (textView!!.text == "※ 이 곳에 음성 인식 결과가 나타납니다.") {
                 Toast.makeText(applicationContext, "음성 인식 결과가 없습니다.",
                     Toast.LENGTH_SHORT).show()
-
 
             } else {
                 var second : Int = 0
@@ -77,21 +77,32 @@ class SearchActivity : AppCompatActivity() {
                 myRef.setValue(textView!!.text.toString())
                 customLoading.show()
 
-                second = 0
-                timer(period = 2000, initialDelay=2000){
+                timer(period = 3000, initialDelay=3000){
                     second++
                     print(second)
                     if (second==1){
                         getList()
                     }
-                    if (second==2){
+                    if (second==3){
+                        val check: DatabaseReference = firebaseDatabase!!.getReference("check")
+
+                        check.get().addOnSuccessListener {
+                            if (it.value == "exist") {
+                                intent.putExtra("textStt", textView!!.text)
+                                intent.putExtra("recList",recList)
+                                startActivity(intent)
+                            }
+                            else{
+                                Toast.makeText(applicationContext, "검색 결과가 없습니다.",
+                                        Toast.LENGTH_SHORT).show()
+                                startActivity(intent_this)
+                            }
+                        }.addOnFailureListener{
+                            Log.e("firebase", "Error getting data", it)
+                        }
                         cancel()
-                        startActivity(intent)
                     }
                 }
-                Log.d("RECLIST : ", recList.toString())
-                intent.putExtra("textStt", textView!!.text)
-                intent.putExtra("recList",recList)
             }
         }
 
@@ -145,55 +156,60 @@ class SearchActivity : AppCompatActivity() {
 
     fun getList() {
 //        val database : FirebaseDatabase = FirebaseDatabase.getInstance()
-        val myclass : DatabaseReference = firebaseDatabase!!.getReference("Recommendedclass")
+        val myclass: DatabaseReference = firebaseDatabase!!.getReference("Recommendedclass")
+        val check: DatabaseReference = firebaseDatabase!!.getReference("check")
 
-        //Read from the database
-        val postListener = object : ValueEventListener {
-            var Lecture= ""
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // Get Post object and use the values to update the UI
+        check.get().addOnSuccessListener {
+            if (it.value == "null") {
+                return@addOnSuccessListener
+            } else {
+                //Read from the database
+                val postListener = object : ValueEventListener {
+                    var Lecture = ""
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        // Get Post object and use the values to update the UI
+                        val value = dataSnapshot.value
+                        //textView.text = "$value"
+                        Log.d(TAG, "Value is: " + value.toString());
 
-                val value = dataSnapshot.value
-                //textView.text = "$value"
-                Log.d(TAG, "Value is: " + value.toString());
 
-                Lecture = value.toString()//강의 스트링으로 받기
-                val arr = Lecture.split("], [")
-                val recommendedClasses = Array(10, { item -> ""})
-                //스트링 형태 분리
-                for(i in 0 until arr.size){
-                    if(i==0) {
-                        val str1 = arr[i].replace("[[","")
+                        Lecture = value.toString()//강의 스트링으로 받기
+                        val arr = Lecture.split("], [")
+                        val recommendedClasses = Array(10, { item -> "" })
+                        //스트링 형태 분리
+                        for (i in 0 until arr.size) {
+                            if (i == 0) {
+                                val str1 = arr[i].replace("[[", "")
 //                    Log.w(TAG, ">>"+ i + " " + str1)
-                        recommendedClasses[i]=str1
-                    }
-                    else if(i==9){
-                        val str2 = arr[i].replace("]]","")
+                                recommendedClasses[i] = str1
+                            } else if (i == 9) {
+                                val str2 = arr[i].replace("]]", "")
 //                    Log.w(TAG, ">>"+ i + " " + str2)
-                        recommendedClasses[i]=str2
-                    }
-                    else {
-                        val str3=arr[i]
+                                recommendedClasses[i] = str2
+                            } else {
+                                val str3 = arr[i]
 //                    Log.w(TAG, ">>"+ i + " " + arr[i])
-                        recommendedClasses[i]=str3
+                                recommendedClasses[i] = str3
+                            }
+                            2
+                        }
+                        //데이터 갯수만큼 반복,recList에추가
+                        for (i in 0 until recommendedClasses.size) {
+                            val classArray = recommendedClasses[i].split(", ")
+                            if (classArray.size > 9) {
+                                recList.add(RecommendedItem(classArray[0], classArray[1], classArray[2], classArray[3], classArray[4],
+                                        classArray[5], classArray[6], classArray[7], classArray[8], classArray[9]))
+                            }
+                        }
                     }
-2
-                }
-                //데이터 갯수만큼 반복,recList에추가
-                for(i in 0 until recommendedClasses.size){
-                    val classArray = recommendedClasses[i].split(", ")
-                    if (classArray.size > 9) {
-                        recList.add(RecommendedItem(classArray[0], classArray[1], classArray[2], classArray[3], classArray[4],
-                                classArray[5], classArray[6], classArray[7], classArray[8], classArray[9]))
-                    }
-                }
-            }
 
-            override fun onCancelled(databaseError: DatabaseError) {
-                // Getting Post failed, log a message
-                Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
+                    override fun onCancelled(databaseError: DatabaseError) {
+                        // Getting Post failed, log a message
+                        Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
+                    }
+                }
+                myclass.addValueEventListener(postListener)
             }
         }
-        myclass.addValueEventListener(postListener)
     }
 }
