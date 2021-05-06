@@ -64,7 +64,6 @@ class SearchActivity : AppCompatActivity() {
         val next_intent = findViewById(id.button_next) as ImageButton
         next_intent.setOnClickListener {
             val intent = Intent(this, RecommendActivity::class.java)
-            val intent_this = Intent(this,SearchActivity::class.java)
             val customLoading = LoadingActivity(this)
             if (textView!!.text == "※ 이 곳에 음성 인식 결과가 나타납니다.") {
                 Toast.makeText(applicationContext, "음성 인식 결과가 없습니다.",
@@ -95,7 +94,7 @@ class SearchActivity : AppCompatActivity() {
                             else{
                                 Toast.makeText(applicationContext, "검색 결과가 없습니다.",
                                         Toast.LENGTH_SHORT).show()
-                                startActivity(intent_this)
+                                customLoading.cancel()
                             }
                         }.addOnFailureListener{
                             Log.e("firebase", "Error getting data", it)
