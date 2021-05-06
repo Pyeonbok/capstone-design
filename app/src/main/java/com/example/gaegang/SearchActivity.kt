@@ -72,12 +72,6 @@ class SearchActivity : AppCompatActivity() {
 
             } else {
                 var second : Int = 0
-                timer(period = 2000, initialDelay=2000){
-                    second++
-                    if (second==1){
-                        cancel()
-                    }
-                }
 
                 val myRef : DatabaseReference = firebaseDatabase!!.getReference("sttText")
                 myRef.setValue(textView!!.text.toString())
